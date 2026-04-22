@@ -1,6 +1,7 @@
 import io
 import re
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 
 import requests
 
@@ -24,53 +25,61 @@ DEMO_MATCHES = [
 ]
 
 
-PDF_CANDIDATES = [
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-20.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-21.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-22.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-23.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-24.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-25.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-26.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-27.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-28.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-29.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/04/OP-2026-04-30.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/05/OP-2026-05-01.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/05/OP-2026-05-02.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/05/OP-2026-05-03.pdf",
-    "https://mutuamadridopen.com/wp-content/uploads/2026/05/OP-2026-05-04.pdf",
-]
-
-
 COURT_NAMES = [
     "MANOLO SANTANA STADIUM",
     "ARANTXA SANCHEZ STADIUM",
-    "COURT 3",
+    "STADIUM 3",
     "COURT 4",
     "COURT 5",
     "COURT 6",
     "COURT 7",
+    "COURT 8",
 ]
 
 
 NOISE_PATTERNS = [
-    r"\bSINGLES\b",
-    r"\bDOUBLES\b",
-    r"\bNOT BEFORE\b.*",
-    r"\bFOLLOWED BY\b.*",
-    r"\bSTARTING AT\b.*",
-    r"\bORDER OF PLAY\b.*",
-    r"\bMUTUA MADRID OPEN\b.*",
-    r"\bATP\b",
-    r"\bWTA\b",
-    r"\bPRACTICE\b.*",
-    r"\bWHEELCHAIR\b.*",
-    r"\bUMPIRE\b.*",
-    r"\bREFEREE\b.*",
-    r"\bPage \d+\b",
-    r"\bvs\.\b",
+    r"^\d+\.$",
+    r"^\[\w+\]$",
+    r"^ATP$",
+    r"^WTA$",
+    r"^SINGLES$",
+    r"^DOUBLES$",
+    r"^STARTS AT.*$",
+    r"^FOLLOWED BY.*$",
+    r"^NOT BEFORE.*$",
+    r"^ORDER OF PLAY.*$",
+    r"^MUTUA MADRID OPEN.*$",
+    r"^ANY MATCH ON ANY COURT.*$",
+    r"^ATP SINGLES ALTERNATE SIGN-IN DEADLINE.*$",
+    r"^WTA SINGLES ALTERNATE SIGN-IN DEADLINE.*$",
+    r"^TOURNAMENT DIRECTOR.*$",
+    r"^RELEASED:.*$",
+    r"^UMPIRE.*$",
+    r"^REFEREE.*$",
+    r"^SUPERVISOR.*$",
+    r"^PAGE \d+.*$",
 ]
+
+
+def _candidate_pdf_urls():
+    """
+    Cerca il PDF più recente attorno alla data odierna.
+    Madrid pubblica normalmente Order of Play giornalieri in wp-content/uploads/YYYY/MM/OP-YYYY-MM-DD.pdf
+    """
+    today = datetime.now(timezone.utc).date()
+    dates = []
+
+    # prima date future/prossime, poi oggi, poi ieri e pochi giorni indietro
+    for offset in [1, 0, -1, -2, -3, -4]:
+        d = today + timedelta(days=offset)
+        dates.append(d)
+
+    urls = []
+    for d in dates:
+        urls.append(
+            f"https://mutuamadridopen.com/wp-content/uploads/{d.year}/{d.month:02d}/OP-{d.year}-{d.month:02d}-{d.day:02d}.pdf"
+        )
+    return urls
 
 
 def _download_pdf_text(url: str) -> str:
@@ -78,19 +87,18 @@ def _download_pdf_text(url: str) -> str:
         return ""
 
     try:
-        response = requests.get(url, timeout=20)
-        if response.status_code != 200 or "application/pdf" not in response.headers.get("content-type", "").lower():
+        r = requests.get(url, timeout=20)
+        content_type = r.headers.get("content-type", "").lower()
+        if r.status_code != 200 or "pdf" not in content_type:
             return ""
 
-        pdf_file = io.BytesIO(response.content)
-        reader = PdfReader(pdf_file)
-
-        text_parts = []
+        reader = PdfReader(io.BytesIO(r.content))
+        pages = []
         for page in reader.pages:
-            text = page.extract_text() or ""
-            text_parts.append(text)
+            txt = page.extract_text() or ""
+            pages.append(txt)
 
-        return "\n".join(text_parts)
+        return "\n".join(pages)
     except Exception:
         return ""
 
@@ -98,107 +106,152 @@ def _download_pdf_text(url: str) -> str:
 def _normalize_text(text: str) -> str:
     text = text.replace("\xa0", " ")
     text = re.sub(r"[ \t]+", " ", text)
-    text = re.sub(r"\n+", "\n", text)
+    text = re.sub(r"\n{2,}", "\n", text)
     return text
 
 
 def _clean_line(line: str) -> str:
     line = line.strip()
+    line = re.sub(r"\[[^\]]+\]", "", line)  # [WC], [12], etc.
+    line = re.sub(r"\([A-Z]{2,3}\)", "", line)  # (ESP), (ITA)
+    line = re.sub(r"\s+", " ", line).strip(" -–•")
+    return line.strip()
+
+
+def _is_noise(line: str) -> bool:
+    if not line:
+        return True
+
+    upper = line.upper().strip()
 
     for pattern in NOISE_PATTERNS:
-        line = re.sub(pattern, "", line, flags=re.IGNORECASE)
+        if re.match(pattern, upper):
+            return True
 
-    line = re.sub(r"\[[^\]]*\]", "", line)
-    line = re.sub(r"\([^\)]*\)", "", line)
-    line = re.sub(r"\s+", " ", line).strip(" -–•")
-    return line
+    return False
 
 
 def _looks_like_player_name(line: str) -> bool:
     if not line:
         return False
 
-    if len(line) < 4 or len(line) > 40:
-        return False
-
     if any(ch.isdigit() for ch in line):
         return False
 
     words = line.split()
-    if len(words) < 2 or len(words) > 4:
+    if len(words) < 2 or len(words) > 5:
         return False
 
+    upper_words = [w.upper() for w in words]
     banned = {
-        "STADIUM", "COURT", "ORDER", "PLAY", "MADRID", "OPEN", "SINGLES",
-        "DOUBLES", "FOLLOWED", "STARTING", "MANOLO", "ARANTXA"
+        "MANOLO", "SANTANA", "ARANTXA", "SANCHEZ", "STADIUM", "COURT",
+        "ORDER", "PLAY", "MADRID", "OPEN", "FOLLOWED", "STARTS",
+        "TODAY", "TOMORROW"
     }
-    if any(word.upper() in banned for word in words):
+    if any(w in banned for w in upper_words):
         return False
 
-    uppercase_ratio = sum(1 for c in line if c.isupper()) / max(1, sum(1 for c in line if c.isalpha()))
-    return uppercase_ratio > 0.6
+    alpha_chars = [c for c in line if c.isalpha()]
+    if not alpha_chars:
+        return False
+
+    upper_ratio = sum(1 for c in alpha_chars if c.isupper()) / len(alpha_chars)
+    return upper_ratio >= 0.55
+
+
+def _split_by_courts(text: str):
+    """
+    Divide il testo per blocchi di campo.
+    Ogni blocco parte da un nome campo ufficiale.
+    """
+    lines = [_clean_line(x) for x in _normalize_text(text).split("\n")]
+    lines = [x for x in lines if x and not _is_noise(x)]
+
+    blocks = []
+    current_court = None
+    current_lines = []
+
+    for line in lines:
+        upper = line.upper()
+        if upper in COURT_NAMES:
+            if current_court and current_lines:
+                blocks.append((current_court.title(), current_lines))
+            current_court = upper
+            current_lines = []
+        else:
+            if current_court:
+                current_lines.append(line)
+
+    if current_court and current_lines:
+        blocks.append((current_court.title(), current_lines))
+
+    return blocks
+
+
+def _extract_matches_from_court_block(court: str, lines: list[str]):
+    matches = []
+    candidates = []
+
+    for line in lines:
+        if _is_noise(line):
+            continue
+
+        if _looks_like_player_name(line):
+            candidates.append(line.title())
+
+            if len(candidates) == 2:
+                p1, p2 = candidates[0], candidates[1]
+                if p1 != p2:
+                    matches.append(Match(p1, p2, court))
+                candidates = []
+
+        else:
+            # resetta quando il flusso non sembra più coerente
+            if candidates and len(candidates) == 1:
+                # teniamo il primo se il secondo arriva subito dopo
+                continue
+            if len(candidates) > 2:
+                candidates = []
+
+    return matches
 
 
 def _extract_matches_from_pdf_text(text: str):
-    text = _normalize_text(text)
-    raw_lines = text.split("\n")
+    blocks = _split_by_courts(text)
 
-    matches = []
-    current_court = "Madrid"
+    all_matches = []
+    for court, lines in blocks:
+        block_matches = _extract_matches_from_court_block(court, lines)
+        all_matches.extend(block_matches)
 
-    candidate_names = []
-
-    for raw in raw_lines:
-        line = _clean_line(raw)
-        if not line:
-            continue
-
-        upper_line = line.upper()
-
-        if upper_line in COURT_NAMES:
-            current_court = line.title()
-            candidate_names = []
-            continue
-
-        if _looks_like_player_name(upper_line):
-            candidate_names.append(line.title())
-
-            if len(candidate_names) >= 2:
-                p1 = candidate_names[-2]
-                p2 = candidate_names[-1]
-
-                if p1 != p2:
-                    matches.append(Match(p1, p2, current_court))
-
-                candidate_names = []
-
+    # dedup
     deduped = []
     seen = set()
-    for m in matches:
-        key = (m.player1.lower(), m.player2.lower(), m.court.lower())
-        reverse_key = (m.player2.lower(), m.player1.lower(), m.court.lower())
-        if key not in seen and reverse_key not in seen:
-            seen.add(key)
+    for m in all_matches:
+        k1 = (m.player1.lower(), m.player2.lower(), m.court.lower())
+        k2 = (m.player2.lower(), m.player1.lower(), m.court.lower())
+        if k1 not in seen and k2 not in seen:
+            seen.add(k1)
             deduped.append(m)
 
     return deduped
 
 
-def _load_from_official_pdf():
-    for url in PDF_CANDIDATES:
+def _load_from_latest_official_pdf():
+    for url in _candidate_pdf_urls():
         text = _download_pdf_text(url)
         if not text:
             continue
 
         matches = _extract_matches_from_pdf_text(text)
         if matches:
-            return matches
+            return matches, url
 
-    return []
+    return [], None
 
 
 def get_upcoming_matches():
-    matches = _load_from_official_pdf()
+    matches, source_url = _load_from_latest_official_pdf()
     if matches:
         return matches
     return DEMO_MATCHES
