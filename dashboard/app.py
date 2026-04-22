@@ -1,12 +1,12 @@
 import streamlit as st
 
-from dashboard.services.data_service import get_upcoming_matches
-from dashboard.services.model_service import run_prediction
+from services.data_service import get_upcoming_matches
+from services.model_service import run_prediction
 
-from dashboard.components.match_selector import render_match_selector
-from dashboard.components.prediction_view import render_prediction
-from dashboard.components.breakdown_view import render_breakdown
-from dashboard.components.filters import render_filters
+from components.match_selector import render_match_selector
+from components.prediction_view import render_prediction
+from components.breakdown_view import render_breakdown
+from components.filters import render_filters
 
 
 def main():
