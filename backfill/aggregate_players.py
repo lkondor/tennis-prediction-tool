@@ -1,8 +1,8 @@
 def weighted_mean(values, weights):
-    s_w = sum(weights)
-    if s_w == 0:
+    total_w = sum(weights)
+    if total_w == 0:
         return 0
-    return sum(v * w for v, w in zip(values, weights)) / s_w
+    return sum(v * w for v, w in zip(values, weights)) / total_w
 
 
 def build_three_year_rates(player_record):
@@ -33,5 +33,11 @@ def build_three_year_rates(player_record):
     else:
         player_record["madrid_ace_rate"] = 0
         player_record["madrid_break_rate"] = 0
+
+    if "ace_allowed_clay_3y" not in player_record:
+        player_record["ace_allowed_clay_3y"] = player_record.get("ace_rate_clay_3y", 0)
+
+    if "break_allowed_clay_3y" not in player_record:
+        player_record["break_allowed_clay_3y"] = player_record.get("break_rate_clay_3y", 0)
 
     return player_record
