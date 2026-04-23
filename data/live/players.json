@@ -35,7 +35,8 @@
     "madrid_ace_rate": 5.6667,
     "madrid_break_rate": 1.8333,
     "ace_allowed_clay_3y": 0.7538,
-    "break_allowed_clay_3y": 0.2985
+    "break_allowed_clay_3y": 0.2985,
+    "elo_clay": 2100.0
   },
   "carlos alcaraz": {
     "tour": "ATP",
@@ -73,7 +74,8 @@
     "madrid_ace_rate": 3.625,
     "madrid_break_rate": 2.375,
     "ace_allowed_clay_3y": 0.5329,
-    "break_allowed_clay_3y": 0.3537
+    "break_allowed_clay_3y": 0.3537,
+    "elo_clay": 2200.0
   },
   "iga swiatek": {
     "tour": "WTA",
@@ -111,7 +113,8 @@
     "madrid_ace_rate": 2.0,
     "madrid_break_rate": 3.1429,
     "ace_allowed_clay_3y": 0.2461,
-    "break_allowed_clay_3y": 0.3831
+    "break_allowed_clay_3y": 0.3831,
+    "elo_clay": 2150.0
   },
   "aryna sabalenka": {
     "tour": "WTA",
@@ -149,6 +152,25 @@
     "madrid_ace_rate": 4.5,
     "madrid_break_rate": 1.5,
     "ace_allowed_clay_3y": 0.602,
-    "break_allowed_clay_3y": 0.2859
+    "break_allowed_clay_3y": 0.2859,
+    "elo_clay": 2100.0
+  },
+  "daniil medvedev": {
+    "elo_clay": 2050.0,
+    "ace_rate_clay_3y": 0.25,
+    "break_rate_clay_3y": 0.2,
+    "ace_allowed_clay_3y": 0.225,
+    "break_allowed_clay_3y": 0.16,
+    "madrid_ace_rate": 0.0,
+    "madrid_break_rate": 0.0
+  },
+  "alexander zverev": {
+    "elo_clay": 2000.0,
+    "ace_rate_clay_3y": 0.25,
+    "break_rate_clay_3y": 0.2,
+    "ace_allowed_clay_3y": 0.225,
+    "break_allowed_clay_3y": 0.16,
+    "madrid_ace_rate": 0.0,
+    "madrid_break_rate": 0.0
   }
 }
