@@ -16,23 +16,27 @@ jobs:
         with:
           python-version: "3.11"
 
-      - run: pip install requests beautifulsoup4 pypdf
+      - name: Set permissions
+        run: |
+          git config --global --add safe.directory /github/workspace
 
-      - run: python updater.py
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 pypdf
 
-    - name: Set permissions
-      run: |
-        git config --global --add safe.directory /github/workspace
+      - name: Run updater
+        run: |
+          python updater.py
 
-    - name: Commit updated data
-      run: |
-        git config user.name "github-actions"
-        git config user.email "actions@github.com"
-        git add data/live/*.json
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/live/*.json
 
-        if git diff --cached --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "daily data update"
-          git push
-        fi
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "daily data update"
+            git push
+          fi
