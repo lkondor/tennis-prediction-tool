@@ -16,23 +16,39 @@ class Match:
     tour: str
 
 
+def _safe_load_json(path: Path, default):
+    try:
+        if not path.exists():
+            return default
+
+        text = path.read_text(encoding="utf-8").strip()
+        if not text:
+            return default
+
+        return json.loads(text)
+    except Exception:
+        return default
+
+
 def load_all_matches():
-    if not MATCHES_PATH.exists():
-        return []
+    raw = _safe_load_json(MATCHES_PATH, [])
 
-    with open(MATCHES_PATH, "r", encoding="utf-8") as f:
-        raw = json.load(f)
+    matches = []
+    for m in raw:
+        try:
+            matches.append(
+                Match(
+                    player1=m["player1"],
+                    player2=m["player2"],
+                    court=m["court"],
+                    date=m["date"],
+                    tour=m.get("tour", "")
+                )
+            )
+        except Exception:
+            continue
 
-    return [
-        Match(
-            player1=m["player1"],
-            player2=m["player2"],
-            court=m["court"],
-            date=m["date"],
-            tour=m.get("tour", "")
-        )
-        for m in raw
-    ]
+    return matches
 
 
 def get_available_dates(matches):
@@ -44,7 +60,4 @@ def get_matches_by_date(selected_date):
 
 
 def load_meta():
-    if not META_PATH.exists():
-        return {}
-    with open(META_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return _safe_load_json(META_PATH, {})
