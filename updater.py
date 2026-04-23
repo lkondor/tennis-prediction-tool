@@ -123,27 +123,30 @@ def _normalize_line(line: str) -> str:
 def _looks_like_name(line: str) -> bool:
     if not line:
         return False
-    if any(ch.isdigit() for ch in line):
-        return False
 
-    words = line.split()
-    if len(words) < 2 or len(words) > 5:
+    if " vs " in line.lower():
         return False
 
     banned = {
         "ORDER", "PLAY", "MADRID", "OPEN", "COURT", "STADIUM",
         "FOLLOWED", "STARTING", "NOT", "BEFORE", "SINGLES", "DOUBLES",
-        "TODAY", "TOMORROW", "ROUND", "DAY"
+        "TODAY", "TOMORROW", "ROUND", "DAY", "DEFEATS", "WTA", "ATP",
+        "STARTS", "AT", "H2H"
     }
+
+    words = line.replace(".", " ").split()
+    if len(words) < 2 or len(words) > 5:
+        return False
+
     if any(w.upper() in banned for w in words):
         return False
 
+    # ammetti iniziali tipo "I." e seed già rimossi
     letters = [c for c in line if c.isalpha()]
-    if not letters:
+    if len(letters) < 3:
         return False
 
-    upper_ratio = sum(1 for c in letters if c.isupper()) / len(letters)
-    return upper_ratio > 0.5
+    return True
 
 
 def _parse_matches_from_lines(lines, date_str):
@@ -199,12 +202,123 @@ def fetch_matches_from_atp_daily_schedule(target_date):
     try:
         r = requests.get(url, timeout=20)
         r.raise_for_status()
+
         soup = BeautifulSoup(r.text, "html.parser")
         text = soup.get_text("\n", strip=True)
-        lines = [x.strip() for x in text.splitlines() if x.strip()]
+        raw_lines = [x.strip() for x in text.splitlines() if x.strip()]
 
-        # parser euristico: se la pagina contiene i blocchi court + player names
-        return _parse_matches_from_lines(lines, target_date.isoformat())
+        # normalizza
+        lines = [_normalize_line(x) for x in raw_lines if _normalize_line(x)]
+
+        target_label = target_date.strftime("%a, %-d %B, %Y")
+        target_label_alt = target_date.strftime("%a, %d %B, %Y")
+
+        matches = []
+        current_court = None
+        in_target_day = False
+        i = 0
+
+        while i < len(lines):
+            line = lines[i]
+            upper = line.upper()
+
+            # attiva parsing solo quando siamo nella giornata giusta
+            if target_label.lower() in line.lower() or target_label_alt.lower() in line.lower():
+                in_target_day = True
+                i += 1
+                continue
+
+            # se arriva un altro giorno, fermati
+            if in_target_day and re.match(r"^[A-Z][a-z]{2}, \d{1,2} [A-Z][a-z]+, \d{4}", line):
+                break
+
+            if not in_target_day:
+                i += 1
+                continue
+
+            # campi
+            if upper.startswith("MANOLO SANTANA STADIUM"):
+                current_court = "Manolo Santana Stadium"
+                i += 1
+                continue
+            if upper.startswith("ARANTXA SANCHEZ STADIUM"):
+                current_court = "Arantxa Sanchez Stadium"
+                i += 1
+                continue
+            if upper.startswith("STADIUM 3"):
+                current_court = "Stadium 3"
+                i += 1
+                continue
+            if upper.startswith("COURT 3"):
+                current_court = "Court 3"
+                i += 1
+                continue
+            if upper.startswith("COURT 4"):
+                current_court = "Court 4"
+                i += 1
+                continue
+            if upper.startswith("COURT 5"):
+                current_court = "Court 5"
+                i += 1
+                continue
+            if upper.startswith("COURT 6"):
+                current_court = "Court 6"
+                i += 1
+                continue
+            if upper.startswith("COURT 7"):
+                current_court = "Court 7"
+                i += 1
+                continue
+            if upper.startswith("COURT 8"):
+                current_court = "Court 8"
+                i += 1
+                continue
+
+            # match futuri: nome / Vs / nome
+            if current_court and i + 2 < len(lines):
+                p1 = lines[i]
+                mid = lines[i + 1]
+                p2 = lines[i + 2]
+
+                if (
+                    _looks_like_name(p1)
+                    and mid.upper() == "VS"
+                    and _looks_like_name(p2)
+                ):
+                    matches.append({
+                        "player1": p1.title(),
+                        "player2": p2.title(),
+                        "court": current_court,
+                        "date": target_date.isoformat(),
+                        "tour": "ATP/WTA"
+                    })
+                    i += 3
+                    continue
+
+            i += 1
+
+        # deduplica
+        deduped = []
+        seen = set()
+        for m in matches:
+            key = (
+                m["player1"].lower(),
+                m["player2"].lower(),
+                m["court"].lower(),
+                m["date"]
+            )
+            rev = (
+                m["player2"].lower(),
+                m["player1"].lower(),
+                m["court"].lower(),
+                m["date"]
+            )
+            if key not in seen and rev not in seen:
+                seen.add(key)
+                deduped.append(m)
+
+        return deduped
+
     except Exception:
         return []
 
