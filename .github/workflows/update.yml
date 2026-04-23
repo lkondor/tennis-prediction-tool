@@ -1,9 +1,9 @@
 name: Update Madrid Data
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "5 20 * * *"
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,23 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Set permissions
-        run: |
-          git config --global --add safe.directory /github/workspace
+      - name: Mark workspace as safe
+        run: git config --global --add safe.directory /github/workspace
 
       - name: Install dependencies
-        run: |
-          pip install requests beautifulsoup4 pypdf
+        run: pip install requests beautifulsoup4 pypdf
 
       - name: Run updater
-        run: |
-          python updater.py
+        run: python updater.py
 
       - name: Commit updated data
         run: |
