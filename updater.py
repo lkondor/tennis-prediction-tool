@@ -1,7 +1,21 @@
+import io
 import json
+import re
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+
+import requests
+
+try:
+    from bs4 import BeautifulSoup
+except Exception:
+    BeautifulSoup = None
+
+try:
+    from pypdf import PdfReader
+except Exception:
+    PdfReader = None
 
 from backfill.elo import SurfaceElo
 from backfill.atp_backfill import build_atp_player_backfill
@@ -13,6 +27,19 @@ from backfill.results_scraper import scrape_results_history
 
 OUT_DIR = Path("data/live")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+COURT_NAMES = {
+    "MANOLO SANTANA STADIUM",
+    "ARANTXA SANCHEZ STADIUM",
+    "STADIUM 3",
+    "COURT 3",
+    "COURT 4",
+    "COURT 5",
+    "COURT 6",
+    "COURT 7",
+    "COURT 8",
+}
 
 
 def safe_write_json(path: Path, payload):
@@ -38,7 +65,6 @@ def compute_clay_elo(results_history):
 
     elo_map = elo.export()
 
-    # fallback realistico se non ci sono ancora abbastanza risultati storici
     if not elo_map:
         return {
             "jannik sinner": 2100.0,
@@ -56,73 +82,212 @@ def merge_players(atp_players, wta_players, elo_map):
     merged = {}
 
     for name, rec in atp_players.items():
-        base = build_three_year_rates(rec)
-        merged[name.lower().strip()] = base
+        merged[name.lower().strip()] = build_three_year_rates(rec)
 
     for name, rec in wta_players.items():
-        base = build_three_year_rates(rec)
-        merged[name.lower().strip()] = base
+        merged[name.lower().strip()] = build_three_year_rates(rec)
 
     for name, rating in elo_map.items():
         clean_name = name.lower().strip()
         merged.setdefault(clean_name, {})
         merged[clean_name]["elo_clay"] = round(rating, 1)
 
-    # fallback di sicurezza per campi usati dal modello
-    for name, rec in merged.items():
+    for _, rec in merged.items():
         rec.setdefault("elo_clay", 1800.0)
         rec.setdefault("ace_rate_clay_3y", 0.25)
         rec.setdefault("break_rate_clay_3y", 0.20)
-
-        # se non presenti, li deriviamo dai tassi base
         rec.setdefault("ace_allowed_clay_3y", round(rec["ace_rate_clay_3y"] * 0.9, 4))
         rec.setdefault("break_allowed_clay_3y", round(rec["break_rate_clay_3y"] * 0.8, 4))
-
         rec.setdefault("madrid_ace_rate", 0.0)
         rec.setdefault("madrid_break_rate", 0.0)
 
     return merged
 
 
-def update_matches():
-    madrid_today = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
-
-    # placeholder coerente finché non colleghiamo lo scraper reale order-of-play
-    matches = [
-        {
-            "player1": "Jannik Sinner",
-            "player2": "Daniil Medvedev",
-            "court": "Manolo Santana Stadium",
-            "date": madrid_today,
-            "tour": "ATP"
-        },
-        {
-            "player1": "Carlos Alcaraz",
-            "player2": "Alexander Zverev",
-            "court": "Court 4",
-            "date": madrid_today,
-            "tour": "ATP"
-        },
-        {
-            "player1": "Iga Swiatek",
-            "player2": "Aryna Sabalenka",
-            "court": "Arantxa Sanchez Stadium",
-            "date": madrid_today,
-            "tour": "WTA"
-        }
+def _candidate_dates():
+    madrid_today = datetime.now(ZoneInfo("Europe/Madrid")).date()
+    return [
+        madrid_today,
+        madrid_today + timedelta(days=1),
     ]
 
-    safe_write_json(OUT_DIR / "matches.json", matches)
-    return matches
+
+def _normalize_line(line: str) -> str:
+    line = line.replace("\xa0", " ").strip()
+    line = re.sub(r"\[[^\]]+\]", "", line)
+    line = re.sub(r"\([A-Z]{2,3}\)", "", line)
+    line = re.sub(r"\s+", " ", line).strip(" -–•")
+    return line.strip()
+
+
+def _looks_like_name(line: str) -> bool:
+    if not line:
+        return False
+    if any(ch.isdigit() for ch in line):
+        return False
+
+    words = line.split()
+    if len(words) < 2 or len(words) > 5:
+        return False
+
+    banned = {
+        "ORDER", "PLAY", "MADRID", "OPEN", "COURT", "STADIUM",
+        "FOLLOWED", "STARTING", "NOT", "BEFORE", "SINGLES", "DOUBLES",
+        "TODAY", "TOMORROW", "ROUND", "DAY"
+    }
+    if any(w.upper() in banned for w in words):
+        return False
+
+    letters = [c for c in line if c.isalpha()]
+    if not letters:
+        return False
+
+    upper_ratio = sum(1 for c in letters if c.isupper()) / len(letters)
+    return upper_ratio > 0.5
+
+
+def _parse_matches_from_lines(lines, date_str):
+    matches = []
+    current_court = None
+    buffer_names = []
+
+    for raw in lines:
+        line = _normalize_line(raw)
+        if not line:
+            continue
+
+        upper = line.upper()
+
+        if upper in COURT_NAMES:
+            current_court = line.title()
+            buffer_names = []
+            continue
+
+        if _looks_like_name(line):
+            buffer_names.append(line.title())
+            if len(buffer_names) == 2 and current_court:
+                p1, p2 = buffer_names
+                if p1 != p2:
+                    matches.append({
+                        "player1": p1,
+                        "player2": p2,
+                        "court": current_court,
+                        "date": date_str,
+                        "tour": "ATP/WTA"
+                    })
+                buffer_names = []
+        else:
+            buffer_names = []
+
+    deduped = []
+    seen = set()
+    for m in matches:
+        key = (m["player1"].lower(), m["player2"].lower(), m["court"].lower(), m["date"])
+        rev = (m["player2"].lower(), m["player1"].lower(), m["court"].lower(), m["date"])
+        if key not in seen and rev not in seen:
+            seen.add(key)
+            deduped.append(m)
+
+    return deduped
+
+
+def fetch_matches_from_atp_daily_schedule(target_date):
+    if BeautifulSoup is None:
+        return []
+
+    url = "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule"
+    try:
+        r = requests.get(url, timeout=20)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+        text = soup.get_text("\n", strip=True)
+        lines = [x.strip() for x in text.splitlines() if x.strip()]
+
+        # parser euristico: se la pagina contiene i blocchi court + player names
+        return _parse_matches_from_lines(lines, target_date.isoformat())
+    except Exception:
+        return []
+
+
+def fetch_matches_from_madrid_pdf(target_date):
+    if PdfReader is None:
+        return []
+
+    pdf_url = (
+        f"https://mutuamadridopen.com/wp-content/uploads/"
+        f"{target_date.year}/{target_date.month:02d}/OP-{target_date.year}-{target_date.month:02d}-{target_date.day:02d}.pdf"
+    )
+
+    try:
+        r = requests.get(pdf_url, timeout=20)
+        if r.status_code != 200:
+            return []
+
+        content_type = r.headers.get("content-type", "").lower()
+        if "pdf" not in content_type:
+            return []
+
+        reader = PdfReader(io.BytesIO(r.content))
+        text = "\n".join((page.extract_text() or "") for page in reader.pages)
+        lines = [x.strip() for x in text.splitlines() if x.strip()]
+        return _parse_matches_from_lines(lines, target_date.isoformat())
+    except Exception:
+        return []
+
+
+def update_matches():
+    all_matches = []
+    source_used = "fallback"
+
+    for target_date in _candidate_dates():
+        matches = fetch_matches_from_atp_daily_schedule(target_date)
+        if matches:
+            all_matches.extend(matches)
+            source_used = "ATP daily schedule"
+
+    if not all_matches:
+        for target_date in _candidate_dates():
+            matches = fetch_matches_from_madrid_pdf(target_date)
+            if matches:
+                all_matches.extend(matches)
+                source_used = "Madrid official PDF"
+
+    if not all_matches:
+        madrid_today = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
+        all_matches = [
+            {
+                "player1": "Jannik Sinner",
+                "player2": "Daniil Medvedev",
+                "court": "Manolo Santana Stadium",
+                "date": madrid_today,
+                "tour": "ATP"
+            },
+            {
+                "player1": "Carlos Alcaraz",
+                "player2": "Alexander Zverev",
+                "court": "Court 4",
+                "date": madrid_today,
+                "tour": "ATP"
+            },
+            {
+                "player1": "Iga Swiatek",
+                "player2": "Aryna Sabalenka",
+                "court": "Arantxa Sanchez Stadium",
+                "date": madrid_today,
+                "tour": "WTA"
+            }
+        ]
+        source_used = "fallback demo"
+
+    safe_write_json(OUT_DIR / "matches.json", all_matches)
+    return all_matches, source_used
 
 
 def main():
     now_madrid = datetime.now(ZoneInfo("Europe/Madrid")).isoformat()
 
-    # 1) Partite del giorno
-    matches = update_matches()
+    matches, match_source = update_matches()
 
-    # 2) Storico risultati per Elo
     try:
         results_history = scrape_results_history()
         if not isinstance(results_history, list):
@@ -132,7 +297,6 @@ def main():
 
     elo_map = compute_clay_elo(results_history)
 
-    # 3) Backfill ATP/WTA
     try:
         atp_players = build_atp_player_backfill()
         if not isinstance(atp_players, dict):
@@ -149,7 +313,6 @@ def main():
 
     players = merge_players(atp_players, wta_players, elo_map)
 
-    # 4) Meteo Madrid
     try:
         weather = fetch_madrid_weather_forecast()
         if not isinstance(weather, dict):
@@ -157,12 +320,11 @@ def main():
     except Exception:
         weather = {}
 
-    # 5) Scrittura file finali
     safe_write_json(OUT_DIR / "players.json", players)
     safe_write_json(OUT_DIR / "weather.json", weather)
     safe_write_json(OUT_DIR / "meta.json", {
         "updated_at": now_madrid,
-        "match_source": "daily updater placeholder",
+        "match_source": match_source,
         "players_backfill_updated_at": now_madrid,
         "results_count": len(results_history),
         "matches_count": len(matches),
