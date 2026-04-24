@@ -233,6 +233,34 @@ def parse_matches_from_lines(lines, default_date=None):
     current_date = default_date
     current_court = None
 
+    def is_initial(value):
+        return bool(re.match(r"^[A-Z]\.$", value.strip()))
+
+    def combine_name(idx):
+        """
+        Gestisce nomi ATP/WTA spezzati:
+        J.
+        Sinner
+
+        oppure:
+        A.
+        de Minaur
+        """
+        if idx + 1 >= len(lines):
+            return None, idx
+
+        first = clean_text(lines[idx])
+        second = clean_text(lines[idx + 1])
+
+        if is_initial(first) and looks_like_player_name(f"{first} {second}"):
+            return f"{first} {second}", idx + 2
+
+        candidate = clean_text(lines[idx])
+        if looks_like_player_name(candidate):
+            return candidate, idx + 1
+
+        return None, idx
+
     i = 0
 
     while i < len(lines):
@@ -255,32 +283,37 @@ def parse_matches_from_lines(lines, default_date=None):
             i += 1
             continue
 
-        if current_date and current_court and i + 2 < len(lines):
-            p1 = clean_text(lines[i])
-            mid = clean_text(lines[i + 1])
-            p2 = clean_text(lines[i + 2])
+        if not current_date or not current_court:
+            i += 1
+            continue
 
-            if (
-                looks_like_player_name(p1)
-                and mid.upper() == "VS"
-                and looks_like_player_name(p2)
-            ):
-                matches.append(
-                    {
-                        "player1": p1.title(),
-                        "player2": p2.title(),
-                        "court": current_court,
-                        "date": current_date,
-                        "tour": "ATP/WTA",
-                    }
-                )
-                i += 3
-                continue
+        p1, next_i = combine_name(i)
+        if not p1:
+            i += 1
+            continue
 
-        i += 1
+        if next_i >= len(lines) or clean_text(lines[next_i]).upper() != "VS":
+            i += 1
+            continue
+
+        p2, final_i = combine_name(next_i + 1)
+        if not p2:
+            i += 1
+            continue
+
+        matches.append(
+            {
+                "player1": p1.title(),
+                "player2": p2.title(),
+                "court": current_court,
+                "date": current_date,
+                "tour": "ATP/WTA",
+            }
+        )
+
+        i = final_i
 
     return dedupe_matches(matches)
-
 
 # ============================================================
 # Source 1: ATP Daily Schedule
