@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-24T18:34:01.682326+02:00",
+  "updated_at": "2026-04-24T18:38:56.075840+02:00",
   "used_source": "ATP daily schedule",
   "atp": {
     "status": "ok",
     "url": "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule",
     "http_status": 200,
-    "line_count": 442,
+    "line_count": 445,
     "sample_lines": [
       "ATP Masters 1000 Madrid | Daily Schedule | ATP Tour | Tennis",
       "ATP Tour",
@@ -83,9 +83,12 @@
       "R64",
       "J.",
       "Sinner",
-      "Vs",
+      "Defeats",
       "B.",
       "Bonzi",
+      "67",
+      "6",
+      "61 64",
       "H2H",
       "Not Before 20:00",
       "R64",
@@ -123,14 +126,11 @@
       "Defeats",
       "B.",
       "Shelton",
-      "64 67",
-      "4",
-      "76",
-      "5"
+      "64 67"
     ],
-    "matches_count": 26,
+    "matches_count": 25,
     "error": null
   },
   "pdf": null,
-  "final_matches_count": 26
+  "final_matches_count": 25
 }
