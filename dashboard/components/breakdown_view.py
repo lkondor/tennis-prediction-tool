@@ -1,18 +1,23 @@
 import streamlit as st
 
+
 def render_breakdown(context):
     st.subheader("Model Breakdown")
 
     st.json({
-        "Elo A": context.get("elo_a", "-"),
-        "Elo B": context.get("elo_b", "-"),
-        "Win Prob A": context.get("win_prob_a", "-"),
-        "Win Prob B": context.get("win_prob_b", "-"),
-        "Court Factor": context.get("court_factor", "-"),
-        "Madrid Factor": context.get("madrid_factor", "-"),
-        "Match Length": context.get("match_length", "-"),
-        "Avg Temp": context.get("avg_temp", "-"),
-        "Wind km/h": context.get("wind_kmh", "-"),
-        "Ace Weather Factor": context.get("ace_weather_factor", "-"),
-        "Break Weather Factor": context.get("break_weather_factor", "-"),
+        "matched_player_a": context.get("matched_player_a"),
+        "matched_player_b": context.get("matched_player_b"),
+        "data_quality_a": context.get("data_quality_a"),
+        "data_quality_b": context.get("data_quality_b"),
+        "elo_a": context.get("elo_a"),
+        "elo_b": context.get("elo_b"),
+        "win_prob_a": context.get("win_prob_a"),
+        "win_prob_b": context.get("win_prob_b"),
+        "court_factor": context.get("court_factor"),
+        "madrid_factor": context.get("madrid_factor"),
+        "match_length": context.get("match_length"),
+        "avg_temp": context.get("avg_temp"),
+        "wind_kmh": context.get("wind_kmh"),
+        "ace_weather_factor": context.get("ace_weather_factor"),
+        "break_weather_factor": context.get("break_weather_factor"),
     })
