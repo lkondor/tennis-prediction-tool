@@ -204,7 +204,7 @@ def refresh_results_history():
     """
 
     existing = load_existing_results()
-    atp_new, atp_debug = parse_atp_current_madrid_results()
+    atp_new, atp_debug = [], {"status": "disabled_html_parser"}
 
     merged = dedupe_results(existing + atp_new)
 
