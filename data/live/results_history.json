@@ -143,4 +143,23 @@
     "return_games_p1": 12,
     "return_games_p2": 13
   }
+
+  {
+    "date": "2025-05-02",
+    "tour": "WTA",
+    "tournament": "Madrid",
+    "surface": "Clay",
+    "player1": "Qinwen Zheng",
+    "player2": "Sofia Kenin",
+    "winner": "Qinwen Zheng",
+    "loser": "Sofia Kenin",
+    "aces_p1": 6,
+    "aces_p2": 2,
+    "service_games_p1": 11,
+    "service_games_p2": 11,
+    "breaks_p1": 4,
+    "breaks_p2": 2,
+    "return_games_p1": 11,
+    "return_games_p2": 11
+  }
 ]
