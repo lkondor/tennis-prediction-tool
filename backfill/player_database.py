@@ -9,6 +9,7 @@ RESULTS_HISTORY_PATH = OUT_DIR / "results_history.json"
 ATP_INDEX_PATH = OUT_DIR / "atp_players_index.json"
 WTA_INDEX_PATH = OUT_DIR / "wta_players_index.json"
 ALIASES_PATH = OUT_DIR / "player_aliases.json"
+OVERRIDES_PATH = OUT_DIR / "player_stat_overrides.json"
 
 
 DEFAULT_PLAYER = {
@@ -251,6 +252,10 @@ def aggregate_player_stats(results):
     return output
 
 
+def load_stat_overrides():
+    return safe_load_json(OVERRIDES_PATH, {})
+
+
 def build_players_database():
     aliases = load_aliases()
     indexed_players = load_player_indices()
@@ -279,4 +284,13 @@ def build_players_database():
 
         players[name] = base
 
+    overrides = load_stat_overrides()
+
+    for raw_name, override in overrides.items():
+        name = canonical_name(raw_name, aliases)
+
+        players.setdefault(name, dict(DEFAULT_PLAYER))
+        players[name].update(override)
+        players[name]["data_quality"] = "official_override"
+    
     return players
