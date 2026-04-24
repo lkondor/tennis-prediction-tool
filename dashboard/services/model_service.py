@@ -5,6 +5,7 @@ from pathlib import Path
 
 PLAYERS_PATH = Path("data/live/players.json")
 WEATHER_PATH = Path("data/live/weather.json")
+ALIASES_PATH = Path("data/live/player_aliases.json")
 
 
 def load_players():
@@ -23,9 +24,21 @@ def load_weather():
         return json.load(f)
 
 
+def load_aliases():
+    if not ALIASES_PATH.exists():
+        return {}
+
+    with open(ALIASES_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def resolve_player_key(display_name, players):
+    aliases = load_aliases()
     name = str(display_name).lower().strip()
 
+    if name in aliases and aliases[name] in players:
+        return aliases[name]
+    
     ALIASES = {
         "q. zheng": "qinwen zheng",
         "s. kenin": "sofia kenin",
