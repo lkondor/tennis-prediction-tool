@@ -645,7 +645,7 @@ def main():
     timestamp = now_madrid().isoformat()
 
     matches, match_source = update_matches()
-    expand_history()
+    history_info = expand_history()
     results_info = {
         "final_count": len(json.loads((OUT_DIR / "results_history.json").read_text(encoding="utf-8"))),
         "new_atp_count": 0
@@ -658,6 +658,8 @@ def main():
         "match_source": match_source,
         "matches_count": len(matches),
         "players_backfill_updated_at": timestamp,
+        "synthetic_added_matches": history_info["added_matches"],
+        "synthetic_total_matches": history_info["total_matches"],
         "results_count": results_info["final_count"],
         "new_results_count": results_info["new_atp_count"],
         "players_count": player_info["players_count"],
