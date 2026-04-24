@@ -42,8 +42,8 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "J. Fonseca",
-    "player2": "M. Cilic",
+    "player1": "T. Tirante",
+    "player2": "T. Paul",
     "court": "Arantxa Sanchez Stadium",
     "date": "2026-04-24",
     "tour": "ATP/WTA"
@@ -65,13 +65,6 @@
   {
     "player1": "A. Rublev",
     "player2": "V. Kopriva",
-    "court": "Stadium 3",
-    "date": "2026-04-24",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "T. Tirante",
-    "player2": "T. Paul",
     "court": "Stadium 3",
     "date": "2026-04-24",
     "tour": "ATP/WTA"
