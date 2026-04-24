@@ -646,7 +646,10 @@ def main():
 
     matches, match_source = update_matches()
     expand_history()
-    results_info = refresh_results_history()
+    results_info = {
+        "final_count": len(json.loads((OUT_DIR / "results_history.json").read_text(encoding="utf-8"))),
+        "new_atp_count": 0
+    }
     player_info = update_players(matches)
     weather_info = update_weather()
 
