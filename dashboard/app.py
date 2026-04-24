@@ -38,7 +38,7 @@ def main():
     result, context = run_prediction(selected_match)
 
     render_prediction(result, selected_match.player1, selected_match.player2)
-    render_breakdown(result, context)
+    render_breakdown(context)
 
 
 if __name__ == "__main__":
