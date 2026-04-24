@@ -593,8 +593,12 @@ def update_players(matches):
                 }
                 unresolved_players.append(key)
 
+    safe_write_json(
+        OUT_DIR / "unresolved_players.json",
+        sorted(set(unresolved_players))
+    )
+
     safe_write_json(OUT_DIR / "players.json", players)
-    safe_write_json(OUT_DIR / "unresolved_players.json", sorted(set(unresolved_players)))
 
     historical_count = sum(
         1 for p in players.values()
@@ -612,6 +616,7 @@ def update_players(matches):
         "historical_players_count": historical_count,
         "unresolved_players_count": unresolved_count,
     }
+
 
 def update_weather():
     try:
