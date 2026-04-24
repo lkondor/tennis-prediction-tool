@@ -1,13 +1,20 @@
-{
-  "date": "2025-05-02",
-  "surface": "Clay",
-  "tournament": "Madrid",
-  "winner": "Carlos Alcaraz",
-  "loser": "Jannik Sinner",
-  "aces_w": 7,
-  "aces_l": 5,
-  "service_games_w": 10,
-  "service_games_l": 10,
-  "breaks_w": 2,
-  "breaks_l": 1
-}
+[
+  {
+    "date": "2025-04-26",
+    "tour": "ATP",
+    "tournament": "Madrid",
+    "surface": "Clay",
+    "player1": "Carlos Alcaraz",
+    "player2": "Alexander Zverev",
+    "winner": "Carlos Alcaraz",
+    "loser": "Alexander Zverev",
+    "aces_p1": 6,
+    "aces_p2": 8,
+    "service_games_p1": 12,
+    "service_games_p2": 12,
+    "breaks_p1": 3,
+    "breaks_p2": 1,
+    "return_games_p1": 12,
+    "return_games_p2": 12
+  }
+]
