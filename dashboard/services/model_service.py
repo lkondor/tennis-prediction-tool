@@ -29,13 +29,17 @@ def resolve_player_key(display_name, players):
     if name in players:
         return name
 
-    parts = name.replace(".", "").split()
+    # normalizza spazi e punti
+    cleaned = name.replace(".", "").strip()
+    parts = cleaned.split()
+
     if len(parts) < 2:
         return name
 
     initial = parts[0][0]
     surname = " ".join(parts[1:])
 
+    # caso: "j sinner" -> "jannik sinner"
     for key in players.keys():
         key_parts = key.split()
         if len(key_parts) < 2:
@@ -45,6 +49,15 @@ def resolve_player_key(display_name, players):
         key_surname = " ".join(key_parts[1:])
 
         if key_initial == initial and key_surname == surname:
+            return key
+
+    # caso cognomi composti: "a de minaur" -> "alex de minaur"
+    for key in players.keys():
+        key_parts = key.split()
+        if len(key_parts) < 2:
+            continue
+
+        if key_parts[0][0] == initial and key.endswith(surname):
             return key
 
     return name
