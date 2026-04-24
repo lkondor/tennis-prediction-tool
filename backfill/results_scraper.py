@@ -125,7 +125,7 @@ def parse_atp_current_madrid_results():
 
         soup = BeautifulSoup(response.text, "html.parser")
 
-            debug["html_diagnostics"] = {
+        debug["html_diagnostics"] = {
             "day_table_rows": len(soup.select(".day-table tbody tr")),
             "table_rows": len(soup.select("table tr")),
             "match_rows": len(soup.select("[class*='match']")),
@@ -136,10 +136,10 @@ def parse_atp_current_madrid_results():
                     c
                     for tag in soup.find_all(True)
                     for c in (tag.get("class") or [])
-                    })
-                )[:100],
-            }
-
+                })
+            )[:100],
+        }
+        
         aliases = load_aliases()
         results = []
 
