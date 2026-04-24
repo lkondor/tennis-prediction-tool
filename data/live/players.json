@@ -1,139 +1,27 @@
 {
-  "alexander zverev": {
-    "elo_clay": 1500.0,
-    "ace_rate_clay_3y": 0.7308,
-    "ace_allowed_clay_3y": 0.5,
-    "break_rate_clay_3y": 0.1667,
-    "break_allowed_clay_3y": 0.1538,
-    "madrid_ace_rate": 10.0,
-    "madrid_break_rate": 1.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 2
-  },
-  "aryna sabalenka": {
-    "elo_clay": 1488.0,
-    "ace_rate_clay_3y": 0.5833,
-    "ace_allowed_clay_3y": 0.1818,
-    "break_rate_clay_3y": 0.1818,
-    "break_allowed_clay_3y": 0.4167,
-    "madrid_ace_rate": 7.0,
-    "madrid_break_rate": 2.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
-  "ben shelton": {
-    "elo_clay": 1512.0,
-    "ace_rate_clay_3y": 1.0,
-    "ace_allowed_clay_3y": 0.6667,
-    "break_rate_clay_3y": 0.1667,
-    "break_allowed_clay_3y": 0.0,
-    "madrid_ace_rate": 13.0,
-    "madrid_break_rate": 2.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
   "carlos alcaraz": {
-    "elo_clay": 1523.2,
-    "ace_rate_clay_3y": 0.4583,
-    "ace_allowed_clay_3y": 0.52,
-    "break_rate_clay_3y": 0.28,
-    "break_allowed_clay_3y": 0.0833,
-    "madrid_ace_rate": 6.0,
-    "madrid_break_rate": 3.0,
-    "data_quality": "historical_match_stats",
-    "tour": "ATP",
-    "rank": 2,
-    "matches_in_backfill": 2
-  },
-  "daniil medvedev": {
-    "elo_clay": 1476.0,
-    "ace_rate_clay_3y": 0.6,
-    "ace_allowed_clay_3y": 0.6154,
-    "break_rate_clay_3y": 0.0769,
-    "break_allowed_clay_3y": 0.24,
-    "madrid_ace_rate": 9.0,
-    "madrid_break_rate": 1.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 2
-  },
-  "dominic stricker": {
-    "elo_clay": 1488.0,
-    "ace_rate_clay_3y": 0.6667,
-    "ace_allowed_clay_3y": 1.0,
-    "break_rate_clay_3y": 0.0,
-    "break_allowed_clay_3y": 0.1667,
-    "madrid_ace_rate": 8.0,
+    "elo_clay": 1800.0,
+    "ace_rate_clay_3y": 0.25,
+    "ace_allowed_clay_3y": 0.23,
+    "break_rate_clay_3y": 0.2,
+    "break_allowed_clay_3y": 0.18,
+    "madrid_ace_rate": 0.0,
     "madrid_break_rate": 0.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
-  "elena rybakina": {
-    "elo_clay": 1512.0,
-    "ace_rate_clay_3y": 0.6667,
-    "ace_allowed_clay_3y": 0.2727,
-    "break_rate_clay_3y": 0.3636,
-    "break_allowed_clay_3y": 0.0833,
-    "madrid_ace_rate": 8.0,
-    "madrid_break_rate": 4.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
-  "emma raducanu": {
-    "elo_clay": 1488.0,
-    "ace_rate_clay_3y": 0.2727,
-    "ace_allowed_clay_3y": 0.6667,
-    "break_rate_clay_3y": 0.0833,
-    "break_allowed_clay_3y": 0.3636,
-    "madrid_ace_rate": 3.0,
-    "madrid_break_rate": 1.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
-  "hubert hurkacz": {
-    "elo_clay": 1512.0,
-    "ace_rate_clay_3y": 1.0,
-    "ace_allowed_clay_3y": 0.3077,
-    "break_rate_clay_3y": 0.1538,
-    "break_allowed_clay_3y": 0.0714,
-    "madrid_ace_rate": 14.0,
-    "madrid_break_rate": 2.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
-  },
-  "iga swiatek": {
-    "elo_clay": 1512.0,
-    "ace_rate_clay_3y": 0.1818,
-    "ace_allowed_clay_3y": 0.5833,
-    "break_rate_clay_3y": 0.4167,
-    "break_allowed_clay_3y": 0.1818,
-    "madrid_ace_rate": 2.0,
-    "madrid_break_rate": 5.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 1
+    "data_quality": "fallback",
+    "tour": "ATP",
+    "rank": 2
   },
   "jannik sinner": {
-    "elo_clay": 1512.0,
-    "ace_rate_clay_3y": 0.5385,
-    "ace_allowed_clay_3y": 0.6923,
-    "break_rate_clay_3y": 0.2308,
-    "break_allowed_clay_3y": 0.0769,
-    "madrid_ace_rate": 7.0,
-    "madrid_break_rate": 3.0,
-    "data_quality": "historical_match_stats",
+    "elo_clay": 1800.0,
+    "ace_rate_clay_3y": 0.25,
+    "ace_allowed_clay_3y": 0.23,
+    "break_rate_clay_3y": 0.2,
+    "break_allowed_clay_3y": 0.18,
+    "madrid_ace_rate": 0.0,
+    "madrid_break_rate": 0.0,
+    "data_quality": "fallback",
     "tour": "ATP",
-    "rank": 1,
-    "matches_in_backfill": 1
-  },
-  "lorenzo musetti": {
-    "elo_clay": 1476.8,
-    "ace_rate_clay_3y": 0.28,
-    "ace_allowed_clay_3y": 0.7308,
-    "break_rate_clay_3y": 0.0769,
-    "break_allowed_clay_3y": 0.24,
-    "madrid_ace_rate": 4.0,
-    "madrid_break_rate": 1.0,
-    "data_quality": "historical_match_stats",
-    "matches_in_backfill": 2
+    "rank": 1
   },
   "q. zheng": {
     "elo_clay": 1800.0,
@@ -226,26 +114,6 @@
     "data_quality": "match_only"
   },
   "k. boulter": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "b. shelton": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "d. prizmic": {
     "elo_clay": 1800.0,
     "ace_rate_clay_3y": 0.25,
     "ace_allowed_clay_3y": 0.23,
@@ -406,26 +274,6 @@
     "data_quality": "match_only"
   },
   "t. paul": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "j. lehecka": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "a. tabilo": {
     "elo_clay": 1800.0,
     "ace_rate_clay_3y": 0.25,
     "ace_allowed_clay_3y": 0.23,
@@ -606,26 +454,6 @@
     "data_quality": "match_only"
   },
   "m. kostyuk": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "e. moller": {
-    "elo_clay": 1800.0,
-    "ace_rate_clay_3y": 0.25,
-    "ace_allowed_clay_3y": 0.23,
-    "break_rate_clay_3y": 0.2,
-    "break_allowed_clay_3y": 0.18,
-    "madrid_ace_rate": 0.0,
-    "madrid_break_rate": 0.0,
-    "data_quality": "match_only"
-  },
-  "g. diallo": {
     "elo_clay": 1800.0,
     "ace_rate_clay_3y": 0.25,
     "ace_allowed_clay_3y": 0.23,

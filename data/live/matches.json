@@ -35,13 +35,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "B. Shelton",
-    "player2": "D. Prizmic",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-24",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "L. Jeanjean",
     "player2": "C. Gauff",
     "court": "Arantxa Sanchez Stadium",
@@ -94,13 +87,6 @@
     "player1": "T. Tirante",
     "player2": "T. Paul",
     "court": "Stadium 3",
-    "date": "2026-04-24",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "J. Lehecka",
-    "player2": "A. Tabilo",
-    "court": "Court 4",
     "date": "2026-04-24",
     "tour": "ATP/WTA"
   },
@@ -164,13 +150,6 @@
     "player1": "Y. Putintseva",
     "player2": "M. Kostyuk",
     "court": "Court 6",
-    "date": "2026-04-24",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "E. Moller",
-    "player2": "G. Diallo",
-    "court": "Court 7",
     "date": "2026-04-24",
     "tour": "ATP/WTA"
   },
