@@ -2,7 +2,7 @@ name: Update Madrid Data
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 08:00 Italia circa
+    - cron: '0 6,10,14,18 * * *'
   workflow_dispatch:
 
 permissions:
