@@ -318,6 +318,25 @@ def run_prediction(match):
     else:
         confidence_label = "Bassa"
 
+    ace_edge = abs(aces_a - aces_b) / max(aces_a + aces_b, 1)
+    break_edge = abs(breaks_a - breaks_b) / max(breaks_a + breaks_b, 1)
+    win_edge = abs(p_a - p_b)
+
+    value_score = round(
+        (confidence_score * 0.45)
+        + (win_edge * 0.25)
+        + (ace_edge * 0.15)
+        + (break_edge * 0.15),
+        3
+    )
+
+    if value_score >= 0.70:
+        value_label = "Forte"
+    elif value_score >= 0.50:
+        value_label = "Interessante"
+    else:
+        value_label = "Basso"
+
     result = {
         "playerA": {
             "aces": aces_a,
@@ -362,6 +381,11 @@ def run_prediction(match):
         "court_confidence": court_confidence,
         "model_edge": round(model_edge, 3),
         "stat_consistency": round(stat_consistency, 3),
+        "ace_edge": round(ace_edge, 3),
+        "break_edge": round(break_edge, 3),
+        "win_edge": round(win_edge, 3),
+        "value_score": value_score,
+        "value_label": value_label,
     }
 
     return result, context
