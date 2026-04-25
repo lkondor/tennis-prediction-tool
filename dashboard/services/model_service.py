@@ -179,8 +179,8 @@ def run_prediction(match):
     
     a = players.get(a_name, {})
     b = players.get(b_name, {})
-    
-        def adjusted_elo(player):
+
+    def adjusted_elo(player):
         elo = player.get("elo_clay") if player.get("elo_clay") is not None else 1800
 
         if player.get("data_quality") == "official_override":
