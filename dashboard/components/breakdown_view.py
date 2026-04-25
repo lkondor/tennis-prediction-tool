@@ -31,4 +31,6 @@ def render_breakdown(context):
         "data_confidence": context.get("data_confidence"),
         "weather_confidence": context.get("weather_confidence"),
         "court_confidence": context.get("court_confidence"),
+        "model_edge": context.get("model_edge"),
+        "stat_consistency": context.get("stat_consistency"),
     })
