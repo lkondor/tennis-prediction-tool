@@ -38,10 +38,17 @@ def main():
     render_filters()
     selected_match = render_match_selector(matches)
     result, context = run_prediction(selected_match)
+    
     st.metric(
         "Confidence",
         context.get("confidence_label", "-"),
         f"{context.get('confidence_score', '-')}"
+    )
+
+    st.metric(
+        "Value",
+        context.get("value_label", "-"),
+        f"{context.get('value_score', '-')}"
     )
 
     render_prediction(result, selected_match.player1, selected_match.player2)
