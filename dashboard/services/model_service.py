@@ -1,5 +1,6 @@
 import json
 import math
+import random
 from pathlib import Path
 
 
@@ -278,6 +279,31 @@ def run_prediction(match):
         1
     )
 
+    def monte_carlo_metric(mean, simulations=1000):
+        values = []
+
+        for _ in range(simulations):
+            value = random.gauss(mean, max(mean * 0.25, 0.8))
+            values.append(max(0, value))
+
+        values.sort()
+
+        return {
+            "mean": round(sum(values) / len(values), 2),
+            "p10": round(values[int(0.10 * len(values))], 2),
+            "p50": round(values[int(0.50 * len(values))], 2),
+            "p90": round(values[int(0.90 * len(values))], 2),
+        }
+
+    mc_aces_a = monte_carlo_metric(aces_a)
+    mc_aces_b = monte_carlo_metric(aces_b)
+    mc_breaks_a = monte_carlo_metric(breaks_a)
+    mc_breaks_b = monte_carlo_metric(breaks_b)
+
+    mc_total_aces = monte_carlo_metric(aces_a + aces_b)
+    mc_total_breaks = monte_carlo_metric(breaks_a + breaks_b)
+
+    
     stat_diff = (
     abs(ace_rate_a - ace_rate_b)
     + abs(break_rate_a - break_rate_b)
@@ -386,6 +412,12 @@ def run_prediction(match):
         "win_edge": round(win_edge, 3),
         "value_score": value_score,
         "value_label": value_label,
+        "mc_aces_a": mc_aces_a,
+        "mc_aces_b": mc_aces_b,
+        "mc_breaks_a": mc_breaks_a,
+        "mc_breaks_b": mc_breaks_b,
+        "mc_total_aces": mc_total_aces,
+        "mc_total_breaks": mc_total_breaks,
     }
 
     return result, context
