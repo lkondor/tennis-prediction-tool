@@ -7,13 +7,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "M. Navone",
-    "player2": "A. Zverev",
-    "court": "Manolo Santana Stadium",
-    "date": "2026-04-25",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "A. Sabalenka",
     "player2": "J. Cristian",
     "court": "Manolo Santana Stadium",
@@ -63,13 +56,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "V. Gaubas",
-    "player2": "F. Auger-Aliassime",
-    "court": "Stadium 3",
-    "date": "2026-04-25",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "H. Baptiste",
     "player2": "J. Paolini",
     "court": "Stadium 3",
@@ -91,30 +77,9 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "C. Ugo Carabelli",
-    "player2": "F. Cobolli",
-    "court": "Court 4",
-    "date": "2026-04-25",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "N. Budkov Kjaer",
     "player2": "D. Shapovalov",
     "court": "Court 4",
-    "date": "2026-04-25",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "U. Humbert",
-    "player2": "T. Atmane",
-    "court": "Court 5",
-    "date": "2026-04-25",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "L. Tien",
-    "player2": "A. Vallejo",
-    "court": "Court 5",
     "date": "2026-04-25",
     "tour": "ATP/WTA"
   },

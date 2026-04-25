@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-25T16:35:26.190394+02:00",
+  "updated_at": "2026-04-25T20:35:01.497029+02:00",
   "used_source": "ATP daily schedule",
   "atp": {
     "status": "ok",
     "url": "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule",
     "http_status": 200,
-    "line_count": 423,
+    "line_count": 433,
     "sample_lines": [
       "ATP Masters 1000 Madrid | Daily Schedule | ATP Tour | Tennis",
       "ATP Tour",
@@ -84,11 +84,12 @@
       "Not Before 16:00",
       "R64",
       "R64",
-      "M.",
-      "Navone",
-      "Vs",
       "A.",
       "Zverev",
+      "Defeats",
+      "M.",
+      "Navone",
+      "61 36 63",
       "H2H",
       "Not Before 20:00",
       "A.",
@@ -125,12 +126,11 @@
       "Galfi",
       "WTA",
       "Followed By",
-      "I.",
-      "Swiatek"
+      "I."
     ],
-    "matches_count": 26,
+    "matches_count": 21,
     "error": null
   },
   "pdf": null,
-  "final_matches_count": 26
+  "final_matches_count": 21
 }
