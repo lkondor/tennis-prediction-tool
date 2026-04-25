@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_autorefresh import st_autorefresh
 
 from services.data_service import load_all_matches, get_available_dates, get_matches_by_date, load_meta
 from services.model_service import run_prediction
@@ -10,6 +11,7 @@ from components.filters import render_filters
 
 def main():
     st.set_page_config(layout="wide")
+    st_autorefresh(interval=15 * 60 * 1000, key="data_refresh")
     st.title("Madrid Open Predictor")
 
     meta = load_meta()
