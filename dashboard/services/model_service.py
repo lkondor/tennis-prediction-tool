@@ -176,7 +176,7 @@ def run_prediction(match):
 
     a_name = resolve_player_key(match.player1, players)
     b_name = resolve_player_key(match.player2, players)
-    
+
     a = players.get(a_name, {})
     b = players.get(b_name, {})
 
@@ -308,8 +308,7 @@ def run_prediction(match):
         confidence_label = "Media"
     else:
         confidence_label = "Bassa"
-   
-    
+
     result = {
         "playerA": {
             "aces": aces_a,
@@ -346,7 +345,7 @@ def run_prediction(match):
         "avg_temp": avg_temp,
         "wind_kmh": wind_kmh,
         "ace_weather_factor": ace_wf,
-        "break_weather_factor": break_wf
+        "break_weather_factor": break_wf,
         "confidence_score": confidence_score,
         "confidence_label": confidence_label,
         "data_confidence": round(data_confidence, 3),
