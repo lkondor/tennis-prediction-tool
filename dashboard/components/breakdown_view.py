@@ -38,4 +38,10 @@ def render_breakdown(context):
         "win_edge": context.get("win_edge"),
         "value_score": context.get("value_score"),
         "value_label": context.get("value_label"),
+        "mc_aces_a": context.get("mc_aces_a"),
+        "mc_aces_b": context.get("mc_aces_b"),
+        "mc_breaks_a": context.get("mc_breaks_a"),
+        "mc_breaks_b": context.get("mc_breaks_b"),
+        "mc_total_aces": context.get("mc_total_aces"),
+        "mc_total_breaks": context.get("mc_total_breaks"),
     })
