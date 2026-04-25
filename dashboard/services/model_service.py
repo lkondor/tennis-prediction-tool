@@ -221,6 +221,7 @@ def run_prediction(match):
 
     p_a = win_prob(elo_a, elo_b)
     p_b = 1 - p_a
+    model_edge = abs(p_a - 0.5) * 2   # 0 → match coin flip, 1 → mismatch totale
 
     c_factor = court_factor(match.court)
     madrid_factor = 1.15
@@ -277,6 +278,13 @@ def run_prediction(match):
         1
     )
 
+    stat_diff = (
+    abs(ace_rate_a - ace_rate_b)
+    + abs(break_rate_a - break_rate_b)
+    ) / 2
+
+    stat_consistency = min(stat_diff * 2, 1.0)
+
     def quality_score(player):
         q = player.get("data_quality", "fallback")
 
@@ -296,15 +304,16 @@ def run_prediction(match):
     court_confidence = 1.0 if match.court else 0.7
 
     confidence_score = round(
-        (data_confidence * 0.65)
-        + (weather_confidence * 0.20)
-        + (court_confidence * 0.15),
+        (data_confidence * 0.45)
+        + (model_edge * 0.30)
+        + (stat_consistency * 0.15)
+        + (weather_confidence * 0.10),
         3
     )
-
-    if confidence_score >= 0.80:
+    
+    if confidence_score >= 0.75:
         confidence_label = "Alta"
-    elif confidence_score >= 0.60:
+    elif confidence_score >= 0.55:
         confidence_label = "Media"
     else:
         confidence_label = "Bassa"
@@ -351,6 +360,8 @@ def run_prediction(match):
         "data_confidence": round(data_confidence, 3),
         "weather_confidence": weather_confidence,
         "court_confidence": court_confidence,
+        "model_edge": round(model_edge, 3),
+        "stat_consistency": round(stat_consistency, 3),
     }
 
     return result, context
