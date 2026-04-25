@@ -33,4 +33,9 @@ def render_breakdown(context):
         "court_confidence": context.get("court_confidence"),
         "model_edge": context.get("model_edge"),
         "stat_consistency": context.get("stat_consistency"),
+        "ace_edge": context.get("ace_edge"),
+        "break_edge": context.get("break_edge"),
+        "win_edge": context.get("win_edge"),
+        "value_score": context.get("value_score"),
+        "value_label": context.get("value_label"),
     })
