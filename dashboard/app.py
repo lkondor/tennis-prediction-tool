@@ -134,6 +134,49 @@ def main():
     with col2:
         st.write("Break totali")
         st.json(context.get("mc_total_breaks", {}))
+
+    
+    st.subheader("Over/Under Simulator")
+
+    ou_col1, ou_col2 = st.columns(2)
+
+    with ou_col1:
+        ace_line = st.number_input(
+            "Linea Ace Totali",
+            min_value=0.0,
+            value=float(result["totals"]["aces"]),
+            step=0.5
+        )
+
+    with ou_col2:
+        break_line = st.number_input(
+            "Linea Break Totali",
+            min_value=0.0,
+            value=float(result["totals"]["breaks"]),
+            step=0.5
+        )
+
+    ace_values = context.get("mc_total_aces_values", [])
+    break_values = context.get("mc_total_breaks_values", [])
+
+    ace_over_prob = (
+        sum(1 for v in ace_values if v > ace_line) / len(ace_values)
+        if ace_values else 0
+    )
+
+    break_over_prob = (
+        sum(1 for v in break_values if v > break_line) / len(break_values)
+        if break_values else 0
+    )
+
+    prob_col1, prob_col2 = st.columns(2)
+
+    with prob_col1:
+        st.metric("Probabilità Over Ace", f"{ace_over_prob:.1%}")
+
+    with prob_col2:
+        st.metric("Probabilità Over Break", f"{break_over_prob:.1%}")
+    
     
     render_breakdown(context)
 
