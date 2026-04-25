@@ -180,20 +180,44 @@ def run_prediction(match):
     a = players.get(a_name, {})
     b = players.get(b_name, {})
     
-    elo_a = a.get("elo_clay") if a.get("elo_clay") is not None else 1800
-    elo_b = b.get("elo_clay") if b.get("elo_clay") is not None else 1800
-    
-    ace_rate_a = a.get("ace_rate_clay_3y") if a.get("ace_rate_clay_3y") is not None else 0.25
-    ace_rate_b = b.get("ace_rate_clay_3y") if b.get("ace_rate_clay_3y") is not None else 0.25
-    
-    ace_allowed_a = a.get("ace_allowed_clay_3y") if a.get("ace_allowed_clay_3y") is not None else 0.23
-    ace_allowed_b = b.get("ace_allowed_clay_3y") if b.get("ace_allowed_clay_3y") is not None else 0.23
-    
-    break_rate_a = a.get("break_rate_clay_3y") if a.get("break_rate_clay_3y") is not None else 0.20
-    break_rate_b = b.get("break_rate_clay_3y") if b.get("break_rate_clay_3y") is not None else 0.20
+        def adjusted_elo(player):
+        elo = player.get("elo_clay") if player.get("elo_clay") is not None else 1800
 
-    break_allowed_a = a.get("break_allowed_clay_3y") if a.get("break_allowed_clay_3y") is not None else 0.18
-    break_allowed_b = b.get("break_allowed_clay_3y") if b.get("break_allowed_clay_3y") is not None else 0.18
+        if player.get("data_quality") == "official_override":
+            return elo + 50
+
+        if player.get("data_quality") == "synthetic":
+            return elo - 30
+
+        return elo
+
+    def safe_stat(player, field, default):
+        value = player.get(field)
+        return value if value is not None else default
+
+    def weighted_stat(value, player):
+        if player.get("data_quality") == "official_override":
+            return value * 1.15
+
+        if player.get("data_quality") == "synthetic":
+            return value * 0.90
+
+        return value
+
+    elo_a = adjusted_elo(a)
+    elo_b = adjusted_elo(b)
+
+    ace_rate_a = weighted_stat(safe_stat(a, "ace_rate_clay_3y", 0.25), a)
+    ace_rate_b = weighted_stat(safe_stat(b, "ace_rate_clay_3y", 0.25), b)
+
+    ace_allowed_a = weighted_stat(safe_stat(a, "ace_allowed_clay_3y", 0.23), a)
+    ace_allowed_b = weighted_stat(safe_stat(b, "ace_allowed_clay_3y", 0.23), b)
+
+    break_rate_a = weighted_stat(safe_stat(a, "break_rate_clay_3y", 0.20), a)
+    break_rate_b = weighted_stat(safe_stat(b, "break_rate_clay_3y", 0.20), b)
+
+    break_allowed_a = weighted_stat(safe_stat(a, "break_allowed_clay_3y", 0.18), a)
+    break_allowed_b = weighted_stat(safe_stat(b, "break_allowed_clay_3y", 0.18), b)
 
     p_a = win_prob(elo_a, elo_b)
     p_b = 1 - p_a
