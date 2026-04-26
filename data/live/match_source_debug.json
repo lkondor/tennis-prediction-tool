@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-26T12:42:58.688700+02:00",
+  "updated_at": "2026-04-26T16:36:05.783431+02:00",
   "used_source": "ATP daily schedule",
   "atp": {
     "status": "ok",
     "url": "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule",
     "http_status": 200,
-    "line_count": 406,
+    "line_count": 415,
     "sample_lines": [
       "ATP Masters 1000 Madrid | Daily Schedule | ATP Tour | Tennis",
       "ATP Tour",
@@ -55,8 +55,8 @@
       "Schedule",
       "Draws",
       "Seeds",
+      "Day 8",
       "Day 7",
-      "Day 6",
       "Day",
       "Use Local Time Zone",
       "Switch",
@@ -74,11 +74,12 @@
       "Followed By",
       "R32",
       "R32",
-      "T.",
-      "Griekspoor",
-      "Vs",
       "L.",
       "Musetti",
+      "Defeats",
+      "T.",
+      "Griekspoor",
+      "64 75",
       "H2H",
       "Not Before 16:00",
       "R32",
@@ -111,9 +112,10 @@
       "R32",
       "J.",
       "Lehecka",
-      "Vs",
+      "Defeats",
       "A.",
       "Michelsen",
+      "64 62",
       "H2H",
       "Not Before 13:00",
       "E.",
@@ -124,13 +126,11 @@
       "WTA",
       "Followed By",
       "J.",
-      "Pegula",
-      "Vs",
-      "M."
+      "Pegula"
     ],
-    "matches_count": 28,
+    "matches_count": 22,
     "error": null
   },
   "pdf": null,
-  "final_matches_count": 28
+  "final_matches_count": 22
 }
