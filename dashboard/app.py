@@ -8,6 +8,12 @@ from services.data_service import (
     load_meta
 )
 from services.model_service import run_prediction
+from services.tracking_service import (
+    load_tracking,
+    add_picks,
+    update_pick_status,
+    tracking_summary
+)
 from components.match_selector import render_match_selector
 from components.prediction_view import render_prediction
 from components.breakdown_view import render_breakdown
@@ -129,6 +135,7 @@ def main():
 
     st.dataframe(rows, use_container_width=True)
 
+    # ---- PORTFOLIO VIEW ----
     st.subheader("Portfolio View")
 
     portfolio_rows = []
@@ -176,7 +183,60 @@ def main():
         st.dataframe(portfolio_rows, use_container_width=True)
     else:
         st.info("Nessun possibile value rilevato con le soglie portfolio attuali.")
-        
+
+    if portfolio_rows:
+        if st.button("Salva Portfolio nel Tracking"):
+            added = add_picks(selected_date, portfolio_rows)
+            st.success(f"{added} nuove pick salvate nel tracking.")
+
+
+    # ---- TRACKING PICKS ----
+    st.subheader("Tracking Picks")
+
+    tracking_rows = load_tracking()
+    summary = tracking_summary(tracking_rows)
+
+    tcol1, tcol2, tcol3, tcol4 = st.columns(4)
+
+    tcol1.metric("Pick totali", summary["total_picks"])
+    tcol2.metric("Settled", summary["settled"])
+    tcol3.metric("Win rate", f"{summary['win_rate']:.1%}")
+    tcol4.metric("W-L-P", f"{summary['wins']}-{summary['losses']}-{summary['pushes']}")
+
+    if tracking_rows:
+        st.dataframe(tracking_rows, use_container_width=True)
+
+        pick_options = {
+            f"{r['date']} | {r['match']} | {r['market']} | {r['line']} | {r['status']}": r["pick_id"]
+            for r in tracking_rows
+        }
+
+        selected_pick_label = st.selectbox(
+            "Seleziona pick da aggiornare",
+            list(pick_options.keys())
+        )
+
+        selected_pick_id = pick_options[selected_pick_label]
+
+        new_status = st.selectbox(
+            "Nuovo status",
+            ["PENDING", "WIN", "LOSS", "PUSH"]
+        )
+
+        notes = st.text_input("Note", "")
+
+        if st.button("Aggiorna pick"):
+            update_pick_status(
+                selected_pick_id,
+                new_status,
+                result=new_status,
+                notes=notes
+            )
+            st.success("Pick aggiornata. La pagina si aggiornerà automaticamente.")
+    else:
+        st.info("Nessuna pick salvata nel tracking.")
+    
+    
 
     # ---- TOP PICKS ----
     top_picks = [
