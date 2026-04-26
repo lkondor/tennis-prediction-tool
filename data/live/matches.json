@@ -77,8 +77,8 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "L. Noskova",
-    "player2": "L. Samsonova",
+    "player1": "D. Prizmic",
+    "player2": "T. Etcheverry",
     "court": "Stadium 3",
     "date": "2026-04-26",
     "tour": "ATP/WTA"
@@ -105,6 +105,13 @@
     "tour": "ATP/WTA"
   },
   {
+    "player1": "L. Noskova",
+    "player2": "L. Samsonova",
+    "court": "Stadium 3",
+    "date": "2026-04-26",
+    "tour": "ATP/WTA"
+  },
+  {
     "player1": "S. Sierra",
     "player2": "Z. Sonmez",
     "court": "Court 4",
@@ -112,8 +119,8 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "D. Prizmic",
-    "player2": "T. Etcheverry",
+    "player1": "J. Paolini",
+    "player2": "L. Siegemund",
     "court": "Court 4",
     "date": "2026-04-26",
     "tour": "ATP/WTA"
@@ -129,13 +136,6 @@
     "player1": "T. Etcheverry",
     "player2": "F. Cabral",
     "court": "Court 4",
-    "date": "2026-04-26",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "H. Zeballos",
-    "player2": "R. Arneodo",
-    "court": "Court 5",
     "date": "2026-04-26",
     "tour": "ATP/WTA"
   },
