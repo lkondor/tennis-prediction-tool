@@ -61,6 +61,25 @@ def main():
         step=0.05
     )
 
+    st.sidebar.subheader("Portfolio")
+
+    min_portfolio_edge = st.sidebar.slider(
+        "Min Portfolio Edge",
+        min_value=0.0,
+        max_value=0.30,
+        value=0.03,
+        step=0.01
+    )
+
+    min_portfolio_confidence = st.sidebar.slider(
+        "Min Portfolio Confidence",
+        min_value=0.0,
+        max_value=1.0,
+        value=0.55,
+        step=0.05
+    )
+
+    
     # ---- MATCH RANKING ----
     st.subheader("Ranking match del giorno")
 
@@ -115,7 +134,11 @@ def main():
     portfolio_rows = []
 
     for r in rows:
-        if (r.get("Ace Edge") or 0) >= 0.03:
+        if (
+            (r.get("Ace Edge") or 0) >= min_portfolio_edge
+            and (r.get("Confidence score") or 0) >= min_portfolio_confidence
+        ):
+            
             portfolio_rows.append({
                 "Market": "Over Ace",
                 "Match": r["Match"],
@@ -127,7 +150,11 @@ def main():
                 "Confidence score": r["Confidence score"],
             })
 
-        if (r.get("Break Edge") or 0) >= 0.03:
+        if (
+            (r.get("Break Edge") or 0) >= min_portfolio_edge
+            and (r.get("Confidence score") or 0) >= min_portfolio_confidence
+        ):
+        
             portfolio_rows.append({
                 "Market": "Over Break",
                 "Match": r["Match"],
