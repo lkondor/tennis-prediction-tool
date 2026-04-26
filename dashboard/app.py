@@ -135,7 +135,7 @@ def main():
         st.write("Break totali")
         st.json(context.get("mc_total_breaks", {}))
 
-    
+
     st.subheader("Over/Under Simulator")
 
     ou_col1, ou_col2 = st.columns(2)
@@ -148,12 +148,40 @@ def main():
             step=0.5
         )
 
+        ace_over_odds = st.number_input(
+            "Quota Over Ace",
+            min_value=1.01,
+            value=1.85,
+            step=0.01
+        )
+
+        ace_under_odds = st.number_input(
+            "Quota Under Ace",
+            min_value=1.01,
+            value=1.85,
+            step=0.01
+        )
+
     with ou_col2:
         break_line = st.number_input(
             "Linea Break Totali",
             min_value=0.0,
             value=float(result["totals"]["breaks"]),
             step=0.5
+        )
+
+        break_over_odds = st.number_input(
+            "Quota Over Break",
+            min_value=1.01,
+            value=1.85,
+            step=0.01
+        )
+
+        break_under_odds = st.number_input(
+            "Quota Under Break",
+            min_value=1.01,
+            value=1.85,
+            step=0.01
         )
 
     ace_values = context.get("mc_total_aces_values", [])
@@ -169,6 +197,33 @@ def main():
         if break_values else 0
     )
 
+    def no_vig_prob(over_odds, under_odds):
+        raw_over = 1 / over_odds
+        raw_under = 1 / under_odds
+        total = raw_over + raw_under
+
+        if total == 0:
+            return 0, 0, 0
+
+        market_over = raw_over / total
+        market_under = raw_under / total
+        overround = total - 1
+
+        return market_over, market_under, overround
+
+    ace_market_over_prob, ace_market_under_prob, ace_overround = no_vig_prob(
+        ace_over_odds,
+        ace_under_odds
+    )
+
+    break_market_over_prob, break_market_under_prob, break_overround = no_vig_prob(
+        break_over_odds,
+        break_under_odds
+    )
+
+    ace_edge = ace_over_prob - ace_market_over_prob
+    break_edge = break_over_prob - break_market_over_prob
+
     prob_col1, prob_col2 = st.columns(2)
 
     with prob_col1:
@@ -176,7 +231,25 @@ def main():
 
     with prob_col2:
         st.metric("Probabilità Over Break", f"{break_over_prob:.1%}")
-    
+
+    edge_col1, edge_col2 = st.columns(2)
+
+    with edge_col1:
+        st.metric(
+            "Edge Over Ace",
+            f"{ace_edge:.1%}",
+            f"Market no-vig: {ace_market_over_prob:.1%}"
+        )
+        st.caption(f"Overround Ace market: {ace_overround:.1%}")
+
+    with edge_col2:
+        st.metric(
+            "Edge Over Break",
+            f"{break_edge:.1%}",
+            f"Market no-vig: {break_market_over_prob:.1%}"
+        )
+        st.caption(f"Overround Break market: {break_overround:.1%}")
+
     
     render_breakdown(context)
 
