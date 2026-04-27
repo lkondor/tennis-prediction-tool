@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-27T18:05:31.886253+02:00",
+  "updated_at": "2026-04-27T21:03:15.265953+02:00",
   "gateway_url": "https://app.atptour.com/api/v2/gateway",
   "leaderboard_test": [
     {
@@ -134,7 +134,7 @@
           }
         },
         {
-          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113417959252064",
+          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113417970135866",
           "hits": [
             "StatsLeaderboard",
             "TopFive",
