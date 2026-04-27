@@ -240,6 +240,51 @@ def inspect_js_assets(page_url):
         return debug
 
 
+def test_atp_gateway():
+    url = "https://app.atptour.com/api/v2/gateway"
+
+    payload = {
+        "operationName": None,
+        "variables": {},
+        "query": """
+        query {
+          __typename
+        }
+        """
+    }
+
+    debug = {
+        "url": url,
+        "http_status": None,
+        "response_sample": None,
+        "status": "not_started",
+        "error": None,
+    }
+
+    try:
+        r = requests.post(
+            url,
+            json=payload,
+            headers={
+                "Content-Type": "application/json",
+                "User-Agent": "Mozilla/5.0",
+                "Origin": "https://www.atptour.com",
+                "Referer": "https://www.atptour.com/",
+            },
+            timeout=25
+        )
+
+        debug["http_status"] = r.status_code
+        debug["response_sample"] = r.text[:2000]
+        debug["status"] = "ok"
+
+    except Exception as e:
+        debug["status"] = "exception"
+        debug["error"] = str(e)
+
+    return debug
+
+
 def inspect_page(name, url):
     debug = {
         "name": name,
@@ -331,6 +376,7 @@ def update_atp_enriched_stats():
         pages.append(inspect_page(name, url))
 
     leaderboard_test = fetch_stats_leaderboard_top_five()
+    gateway_test = test_atp_gateway()
     js_asset_debug = {
         "leaderboard": inspect_js_assets("https://www.atptour.com/en/stats/leaderboard"),
         "individual_game_stats": inspect_js_assets("https://www.atptour.com/en/stats/individual-game-stats"),
@@ -341,6 +387,7 @@ def update_atp_enriched_stats():
         "updated_at": datetime.now(MADRID_TZ).isoformat(),
         "gateway_url": ATP_GATEWAY_URL,
         "leaderboard_test": leaderboard_test,
+        "gateway_test": gateway_test,
         "js_asset_debug": js_asset_debug,
         "pages": pages,
     }
