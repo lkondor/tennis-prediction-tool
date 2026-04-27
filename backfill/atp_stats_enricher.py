@@ -148,6 +148,69 @@ def fetch_stats_leaderboard_top_five():
     return output
 
 
+def parse_leaderboard_tests(leaderboard_tests):
+    players = {}
+
+    def upsert_player(item, stat_type, year, surface):
+        name = str(item.get("PlayerName", "")).lower().strip()
+
+        if not name:
+            return
+
+        stat_rating = item.get("Stat", {}).get("StatRating")
+
+        try:
+            stat_rating = float(stat_rating)
+        except Exception:
+            stat_rating = None
+
+        players.setdefault(name, {
+            "player_id": item.get("PlayerId"),
+            "country": item.get("PlayerCountryCode"),
+            "sources": []
+        })
+
+        players[name][f"{stat_type}_rating_{year}_{surface}"] = stat_rating
+        players[name]["sources"].append(f"ATP leaderboard {stat_type} {year} {surface}")
+
+    for test in leaderboard_tests:
+        if not test.get("looks_like_json"):
+            continue
+
+        try:
+            response = requests.get(
+                test["url"],
+                headers={
+                    "User-Agent": "Mozilla/5.0",
+                    "Accept": "application/json, text/plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Referer": "https://www.atptour.com/en/stats/leaderboard",
+                },
+                timeout=25
+            )
+            payload = response.json()
+        except Exception:
+            continue
+
+        name = test.get("name", "")
+        parts = name.split("_")
+
+        year = parts[0] if parts else "unknown"
+        surface = parts[1] if len(parts) > 1 else "unknown"
+
+        for item in payload.get("LeaderboardTopFiveServe", []):
+            upsert_player(item, "serve", year, surface)
+
+        for item in payload.get("LeaderboardTopFiveReturn", []):
+            upsert_player(item, "return", year, surface)
+
+        for item in payload.get("LeaderboardTopFivePressure", []):
+            upsert_player(item, "pressure", year, surface)
+
+    return players
+
+
+
 def inspect_js_assets(page_url):
     debug = {
         "page_url": page_url,
@@ -375,6 +438,7 @@ def update_atp_enriched_stats():
         pages.append(inspect_page(name, url))
 
     leaderboard_test = fetch_stats_leaderboard_top_five()
+    parsed_players = parse_leaderboard_tests(leaderboard_test)
     gateway_test = test_atp_gateway()
     js_asset_debug = {
         "leaderboard": inspect_js_assets("https://www.atptour.com/en/stats/leaderboard"),
@@ -395,14 +459,15 @@ def update_atp_enriched_stats():
 
     output = {
         "updated_at": datetime.now(MADRID_TZ).isoformat(),
-        "status": "debug_only",
-        "gateway_url": ATP_GATEWAY_URL,
-        "players": {}
+        "status": "ok",
+        "source": "ATP StatsLeaderboard TopFive",
+        "players": parsed_players
     }
 
     safe_write_json(OUTPUT_PATH, output)
 
     return {
-        "status": "debug_only",
+        "status": "ok",
         "pages_checked": len(pages),
+        "players_enriched": len(parsed_players),
     }
