@@ -1,5 +1,16 @@
 {
-  "updated_at": "2026-04-27T15:54:22.048933+02:00",
+  "updated_at": "2026-04-27T16:03:31.544322+02:00",
+  "gateway_url": "https://app.atptour.com/api/v2/gateway",
+  "leaderboard_test": {
+    "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "looks_like_json": false,
+    "json_keys": [],
+    "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"6830dec7-e200-41d2-bfb9-09d90a591d47\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='6830dec7-e200-41d2-bfb9-09d90a591d47'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />\r\n\r\n    <title>404 | ATP Tour | Tennis</title>\r\n    <meta name=\"description\" content=\"\" />\r\n    <meta name=\"title\" content=\"404 | ATP Tour | Tennis\" />\r\n    <meta name=\"keywords\" content=\"\" />\r\n    <meta name=\"thumbnail\" content=\"\" />\r\n    <meta property=\"pageTransitionTitle\" content=\"404\" />\r\n    <!-- facebook -->\r\n    <meta property='og:locale' content=\"en\" />\r\n    <meta property='og:type' content=\"article\" />\r\n    <meta property='og:title' content=\"404 | ATP Tour | Tennis\" />\r\n    <meta property='og:description' content=\"\" />\r\n    <meta property='og:image' content=\"\" />\r\n    <meta property='og:url' content=\"http://www.atptour.com/404?item=%2f-%2fwww%2fstatsleaderboard%2ftopfive&amp;user=default%5canonymous&amp;site=atptour\" />\r\n    <meta property='og:site_name' content=\"ATP Tour\" />\r\n    <!-- twitter -->\r\n    <meta name=\"twitter:card\" content=\"summary\" />\r\n    <meta name=\"twitter:title\" content=\"404 | ATP Tour | Tennis\" />\r\n    <meta name=\"twitter:creator\" content=\"@atptour\" />\r\n    <meta name=\"twitter:description\" content=\"\" />\r\n    <meta name=\"twitter:image\" content=\"\" />\r\n\r\n\r\n<link rel='alternate' hreflang='en' href=\"https://www.atptour.com/404\" />\r\n<link rel='alternate' hreflang='es' href=\"https://www.atptour.com/404\" />\r\n\r\n\r\n    <meta name=\"apple-itunes-app\" content=\"app-id=1480255719\">\r\n\r\n\r\n\r\n\r\n\r\n    <link rel=\"preload\" href=\"/assets/atptour/fonts/creatodisplay-regular-webfont.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\r\n    <link rel=\"preload\" href=\"/assets/atpt",
+    "status": "ok_non_json",
+    "error": null
+  },
   "pages": [
     {
       "name": "stats_home",
@@ -759,6 +770,11 @@
           "tag": "input",
           "attr": "class",
           "value": "atp_footer-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "gateway-host-name"
         },
         {
           "tag": "input",
@@ -1641,6 +1657,251 @@
           "tag": "a",
           "attr": "v-if",
           "value": "match.Type == 'doubles'"
+        },
+        {
+          "tag": "a",
+          "attr": ":href",
+          "value": "`/en/players/atp-head-2-head/${lowercase(match.PlayerTeam.Player.PlayerLastName)}-${lowercase(match.PlayerTeam.Partner.PlayerLastName)}-vs-${lowercase(match.OpponentTeam.Player.PlayerLastName)}-${lowercase(match.OpponentTeam.Partner.PlayerLastName)}/${lowercase(match.PlayerTeam.Player.PlayerId)}/${lowercase(match.PlayerTeam.Partner.PlayerId)}/${lowercase(match.OpponentTeam.Player.PlayerId)}/${lowercase(match.OpponentTeam.Partner.PlayerId)}`"
+        },
+        {
+          "tag": "a",
+          "attr": "v-if",
+          "value": "match.HasStats"
+        },
+        {
+          "tag": "a",
+          "attr": ":href",
+          "value": "`/en/scores/${tournament.EventType === 'GS' || tournament.EventType === 'DCR' || tournament.EventType === 'UC' || tournament.EventType === 'LVR' ? 'match-stats' : 'stats-centre'}/live/${tournament.EventYear}/${tournament.EventId}/${match.MatchId}`"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "match-notes"
+        },
+        {
+          "tag": "div",
+          "attr": "v-if",
+          "value": "!isLoading && ((tournament.LiveMatches && tournament.LiveMatches.length === 0) || (tournament.LiveTeamTieDetails && tournament.LiveTeamTieDetails.length === 0 ))"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "scoresLiveApiUrl"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "https://app.atptour.com/api/v2/gateway/livematches/website?scoringTournamentLevel"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "loader-match-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "win-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "match-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "win-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "match-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "win-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "stats"
+        },
+        {
+          "tag": "a",
+          "attr": "href",
+          "value": "https://www.atptour.com/en/stats/performance-zone"
+        },
+        {
+          "tag": "a",
+          "attr": "href",
+          "value": "https://www.atptour.com/en/stats/win-loss-index"
+        },
+        {
+          "tag": "a",
+          "attr": "href",
+          "value": "https://www.atptour.com/en/stats/performance-zone"
+        },
+        {
+          "tag": "a",
+          "attr": "href",
+          "value": "https://www.atptour.com/en/stats/win-loss-index"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_head2head-listing-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_head2head-data-endpoint"
+        },
+        {
+          "tag": "dl",
+          "attr": "class",
+          "value": "loader-player-stats"
+        },
+        {
+          "tag": "dl",
+          "attr": "class",
+          "value": "player-stats"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "featuredPlayerApiUrl"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "atp_stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "atp_stats--loader"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "loader-player-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "stats-header"
+        },
+        {
+          "tag": "img",
+          "attr": "src",
+          "value": "/-/media/sites/atp-tour/stats/infosys-atp-stats-72px_1.png"
+        },
+        {
+          "tag": "a",
+          "attr": "href",
+          "value": "/en/stats/stats-home"
+        },
+        {
+          "tag": "li",
+          "attr": ":class",
+          "value": "statsType == 'serve' ? 'selected' : ''"
+        },
+        {
+          "tag": "li",
+          "attr": "@click.prevent",
+          "value": "switchStats('serve')"
+        },
+        {
+          "tag": "li",
+          "attr": ":class",
+          "value": "statsType == 'return' ? 'selected' : ''"
+        },
+        {
+          "tag": "li",
+          "attr": "@click.prevent",
+          "value": "switchStats('return')"
+        },
+        {
+          "tag": "li",
+          "attr": ":class",
+          "value": "statsType == 'pressure' ? 'selected' : ''"
+        },
+        {
+          "tag": "li",
+          "attr": "@click.prevent",
+          "value": "switchStats('pressure')"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "stats-content"
+        },
+        {
+          "tag": "div",
+          "attr": "class",
+          "value": "player-stats"
+        },
+        {
+          "tag": "div",
+          "attr": "v-if",
+          "value": "statsArray.length > 0"
+        },
+        {
+          "tag": "dl",
+          "attr": "class",
+          "value": "stats-list"
+        },
+        {
+          "tag": "template",
+          "attr": "v-for",
+          "value": "(serve, index) in statsArray"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_stats-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "/en/-/www/StatsLeaderboard/TopFive/52week/all?v=1"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_news-api"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "http://www.atptour.com/en/stats/individual-game-stats"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "http://www.atptour.com/en/stats/individual-game-stats"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_footer-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "gateway-host-name"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "https://app.atptour.com/api/v2/gateway"
         }
       ],
       "status": "ok",
@@ -2518,6 +2779,21 @@
           "tag": "input",
           "attr": "value",
           "value": "http://www.atptour.com/en/stats/leaderboard"
+        },
+        {
+          "tag": "input",
+          "attr": "class",
+          "value": "atp_footer-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "gateway-host-name"
+        },
+        {
+          "tag": "input",
+          "attr": "value",
+          "value": "https://app.atptour.com/api/v2/gateway"
         }
       ],
       "status": "ok",
@@ -3189,6 +3465,11 @@
           "tag": "input",
           "attr": "class",
           "value": "atp_footer-endpoint"
+        },
+        {
+          "tag": "input",
+          "attr": "id",
+          "value": "gateway-host-name"
         },
         {
           "tag": "input",
