@@ -208,6 +208,15 @@ def inspect_js_assets(page_url):
             "BreakPoints",
             "ReturnGames",
             "ServiceGames",
+            "api/v2/gateway",
+            "graphql",
+            "query",
+            "mutation",
+            "operationName",
+            "StatsLeaderboard",
+            "IndividualGameStats",
+            "TopFive",
+            "statsLeaderboardApiUrl",
         ]
 
         for js_url in js_urls[:30]:
@@ -221,10 +230,22 @@ def inspect_js_assets(page_url):
                 ]
 
                 if hits:
+                    snippets = {}
+                
+                    for kw in hits:
+                        lower_text = text.lower()
+                        lower_kw = kw.lower()
+                        idx = lower_text.find(lower_kw)
+                
+                        if idx != -1:
+                            start = max(0, idx - 800)
+                            end = min(len(text), idx + 1200)
+                            snippets[kw] = text[start:end]
+                
                     debug["matches"].append({
                         "js_url": js_url,
                         "hits": hits,
-                        "sample": text[:1500]
+                        "snippets": snippets
                     })
 
             except Exception as exc:
