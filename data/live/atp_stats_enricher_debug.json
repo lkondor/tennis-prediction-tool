@@ -1,85 +1,80 @@
 {
-  "updated_at": "2026-04-27T17:48:45.555236+02:00",
+  "updated_at": "2026-04-27T17:51:40.481032+02:00",
   "gateway_url": "https://app.atptour.com/api/v2/gateway",
   "leaderboard_test": [
     {
-      "name": "serve_clay_2026",
-      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-      "params": {
-        "boardType": "serve",
-        "surface": "Clay",
-        "duration": "2026"
-      },
+      "name": "2026_clay",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive/2026/Clay?v=1",
       "http_status": 200,
-      "content_type": "text/html; charset=utf-8",
-      "looks_like_json": false,
-      "json_keys": [],
-      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"e5f0404c-511f-414d-8b92-8f9c97317c27\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='e5f0404c-511f-414d-8b92-8f9c97317c27'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
-      "status": "ok_non_json",
+      "content_type": "application/json; charset=utf-8",
+      "looks_like_json": true,
+      "json_keys": [
+        "LeaderboardTopFiveServe",
+        "LeaderboardTopFiveReturn",
+        "LeaderboardTopFivePressure"
+      ],
+      "text_sample": "{\"LeaderboardTopFiveServe\":[{\"PlayerId\":\"S0S1\",\"PlayerName\":\"Ben Shelton\",\"PlayerCountryCode\":\"USA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0s1\",\"ScRelativeUrlPlayerProfile\":\"/en/players/ben-shelton/s0s1/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/usa.svg\",\"Stat\":{\"StatRating\":\"308.1\"}},{\"PlayerId\":\"J0DZ\",\"PlayerName\":\"Rafael Jodar\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/j0dz\",\"ScRelativeUrlPlayerProfile\":\"/en/players/rafael-jodar/j0dz/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"291.8\"}},{\"PlayerId\":\"S0AG\",\"PlayerName\":\"Jannik Sinner\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0ag\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jannik-sinner/s0ag/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"290.4\"}},{\"PlayerId\":\"TE30\",\"PlayerName\":\"Alejandro Tabilo\",\"PlayerCountryCode\":\"CHI\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/te30\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alejandro-tabilo/te30/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/chi.svg\",\"Stat\":{\"StatRating\":\"284.6\"}},{\"PlayerId\":\"F0FV\",\"PlayerName\":\"Joao Fonseca\",\"PlayerCountryCode\":\"BRA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/f0fv\",\"ScRelativeUrlPlayerProfile\":\"/en/players/joao-fonseca/f0fv/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/bra.svg\",\"Stat\":{\"StatRating\":\"283.8\"}}],\"LeaderboardTopFiveReturn\":[{\"PlayerId\":\"A0E2\",\"PlayerName\":\"Carlos Alcaraz\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/a0e2\",\"ScRelativeUrlPlayerProfile\":\"/en/players/carlos-alcaraz/a0e2/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"189.4\"}},{\"PlayerId\":\"S0AG\",\"PlayerName\":\"Jannik Sinner\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0ag\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jannik-sinner/s0ag/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"189.1\"}},{\"PlayerId\":\"N0BS\",\"PlayerName\":\"Mariano Navone\",\"PlayerCountryCode\":\"ARG\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/n0bs\",\"ScRelativeUrlPlayerProfile\":\"/en/players/mariano-navone/n0bs/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/arg.svg\",\"Stat\":{\"StatRating\":\"182.2\"}},{\"PlayerId\":\"J0DZ\",\"PlayerName\":\"Rafael Jodar\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/j0dz\",\"ScRelativeUrlPlayerProfile\":\"/en/players/rafael-jodar/j0dz/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"178.3\"}},{\"PlayerId\":\"RH16\",\"PlayerName\":\"Casper Ruud\",\"PlayerCountryCode\":\"NOR\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/rh16\",\"ScRelativeUrlPlayerProfile\":\"/en/players/casper-ruud/rh16/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/nor.svg\",\"Stat\":{\"StatRatin",
+      "status": "ok_json",
       "error": null
     },
     {
-      "name": "return_clay_2026",
-      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-      "params": {
-        "boardType": "return",
-        "surface": "Clay",
-        "duration": "2026"
-      },
+      "name": "2025_clay",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive/2025/Clay?v=1",
       "http_status": 200,
-      "content_type": "text/html; charset=utf-8",
-      "looks_like_json": false,
-      "json_keys": [],
-      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"e5f0404c-511f-414d-8b92-8f9c97317c27\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='e5f0404c-511f-414d-8b92-8f9c97317c27'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
-      "status": "ok_non_json",
+      "content_type": "application/json; charset=utf-8",
+      "looks_like_json": true,
+      "json_keys": [
+        "LeaderboardTopFiveServe",
+        "LeaderboardTopFiveReturn",
+        "LeaderboardTopFivePressure"
+      ],
+      "text_sample": "{\"LeaderboardTopFiveServe\":[{\"PlayerId\":\"M0NI\",\"PlayerName\":\"Jakub Mensik\",\"PlayerCountryCode\":\"CZE\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/m0ni\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jakub-mensik/m0ni/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/cze.svg\",\"Stat\":{\"StatRating\":\"290.3\"}},{\"PlayerId\":\"D643\",\"PlayerName\":\"Novak Djokovic\",\"PlayerCountryCode\":\"SRB\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/d643\",\"ScRelativeUrlPlayerProfile\":\"/en/players/novak-djokovic/d643/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/srb.svg\",\"Stat\":{\"StatRating\":\"288.7\"}},{\"PlayerId\":\"S0AG\",\"PlayerName\":\"Jannik Sinner\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0ag\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jannik-sinner/s0ag/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"286.5\"}},{\"PlayerId\":\"HB71\",\"PlayerName\":\"Hubert Hurkacz\",\"PlayerCountryCode\":\"POL\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/hb71\",\"ScRelativeUrlPlayerProfile\":\"/en/players/hubert-hurkacz/hb71/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/pol.svg\",\"Stat\":{\"StatRating\":\"283.6\"}},{\"PlayerId\":\"Z355\",\"PlayerName\":\"Alexander Zverev\",\"PlayerCountryCode\":\"GER\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/z355\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alexander-zverev/z355/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ger.svg\",\"Stat\":{\"StatRating\":\"282.9\"}}],\"LeaderboardTopFiveReturn\":[{\"PlayerId\":\"S0AG\",\"PlayerName\":\"Jannik Sinner\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0ag\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jannik-sinner/s0ag/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"177.8\"}},{\"PlayerId\":\"A0E2\",\"PlayerName\":\"Carlos Alcaraz\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/a0e2\",\"ScRelativeUrlPlayerProfile\":\"/en/players/carlos-alcaraz/a0e2/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"176.1\"}},{\"PlayerId\":\"DH58\",\"PlayerName\":\"Alex de Minaur\",\"PlayerCountryCode\":\"AUS\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/dh58\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alex-de-minaur/dh58/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/aus.svg\",\"Stat\":{\"StatRating\":\"175.7\"}},{\"PlayerId\":\"ME82\",\"PlayerName\":\"Adrian Mannarino\",\"PlayerCountryCode\":\"FRA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/me82\",\"ScRelativeUrlPlayerProfile\":\"/en/players/adrian-mannarino/me82/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/fra.svg\",\"Stat\":{\"StatRating\":\"171.6\"}},{\"PlayerId\":\"C0E9\",\"PlayerName\":\"Flavio Cobolli\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/c0e9\",\"ScRelativeUrlPlayerProfile\":\"/en/players/flavio-cobolli/c0e9/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita",
+      "status": "ok_json",
       "error": null
     },
     {
-      "name": "pressure_clay_2026",
-      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-      "params": {
-        "boardType": "pressure",
-        "surface": "Clay",
-        "duration": "2026"
-      },
+      "name": "2024_clay",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive/2024/Clay?v=1",
       "http_status": 200,
-      "content_type": "text/html; charset=utf-8",
-      "looks_like_json": false,
-      "json_keys": [],
-      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"e5f0404c-511f-414d-8b92-8f9c97317c27\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='e5f0404c-511f-414d-8b92-8f9c97317c27'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
-      "status": "ok_non_json",
+      "content_type": "application/json; charset=utf-8",
+      "looks_like_json": true,
+      "json_keys": [
+        "LeaderboardTopFiveServe",
+        "LeaderboardTopFiveReturn",
+        "LeaderboardTopFivePressure"
+      ],
+      "text_sample": "{\"LeaderboardTopFiveServe\":[{\"PlayerId\":\"L0BV\",\"PlayerName\":\"Jiri Lehecka\",\"PlayerCountryCode\":\"CZE\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/l0bv\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jiri-lehecka/l0bv/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/cze.svg\",\"Stat\":{\"StatRating\":\"310.4\"}},{\"PlayerId\":\"BK40\",\"PlayerName\":\"Matteo Berrettini\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/bk40\",\"ScRelativeUrlPlayerProfile\":\"/en/players/matteo-berrettini/bk40/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"305.2\"}},{\"PlayerId\":\"N0AE\",\"PlayerName\":\"Brandon Nakashima\",\"PlayerCountryCode\":\"USA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/n0ae\",\"ScRelativeUrlPlayerProfile\":\"/en/players/brandon-nakashima/n0ae/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/usa.svg\",\"Stat\":{\"StatRating\":\"294.1\"}},{\"PlayerId\":\"Z355\",\"PlayerName\":\"Alexander Zverev\",\"PlayerCountryCode\":\"GER\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/z355\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alexander-zverev/z355/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ger.svg\",\"Stat\":{\"StatRating\":\"290.1\"}},{\"PlayerId\":\"HB71\",\"PlayerName\":\"Hubert Hurkacz\",\"PlayerCountryCode\":\"POL\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/hb71\",\"ScRelativeUrlPlayerProfile\":\"/en/players/hubert-hurkacz/hb71/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/pol.svg\",\"Stat\":{\"StatRating\":\"289.0\"}}],\"LeaderboardTopFiveReturn\":[{\"PlayerId\":\"DH58\",\"PlayerName\":\"Alex de Minaur\",\"PlayerCountryCode\":\"AUS\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/dh58\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alex-de-minaur/dh58/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/aus.svg\",\"Stat\":{\"StatRating\":\"179.5\"}},{\"PlayerId\":\"D643\",\"PlayerName\":\"Novak Djokovic\",\"PlayerCountryCode\":\"SRB\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/d643\",\"ScRelativeUrlPlayerProfile\":\"/en/players/novak-djokovic/d643/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/srb.svg\",\"Stat\":{\"StatRating\":\"179.2\"}},{\"PlayerId\":\"A0E2\",\"PlayerName\":\"Carlos Alcaraz\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/a0e2\",\"ScRelativeUrlPlayerProfile\":\"/en/players/carlos-alcaraz/a0e2/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"178.0\"}},{\"PlayerId\":\"N0BS\",\"PlayerName\":\"Mariano Navone\",\"PlayerCountryCode\":\"ARG\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/n0bs\",\"ScRelativeUrlPlayerProfile\":\"/en/players/mariano-navone/n0bs/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/arg.svg\",\"Stat\":{\"StatRating\":\"177.5\"}},{\"PlayerId\":\"D0F6\",\"PlayerName\":\"Gabriel Diallo\",\"PlayerCountryCode\":\"CAN\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/d0f6\",\"ScRelativeUrlPlayerProfile\":\"/en/players/gabriel-diallo/d0f6/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/imag",
+      "status": "ok_json",
       "error": null
     },
     {
-      "name": "serve_all_52weeks",
-      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-      "params": {
-        "boardType": "serve",
-        "surface": "All Surfaces",
-        "duration": "52 Weeks"
-      },
+      "name": "52weeks_clay",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive/52%20Weeks/Clay?v=1",
       "http_status": 200,
-      "content_type": "text/html; charset=utf-8",
-      "looks_like_json": false,
-      "json_keys": [],
-      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"e5f0404c-511f-414d-8b92-8f9c97317c27\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='e5f0404c-511f-414d-8b92-8f9c97317c27'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
-      "status": "ok_non_json",
+      "content_type": "application/json; charset=utf-8",
+      "looks_like_json": true,
+      "json_keys": [
+        "LeaderboardTopFiveServe",
+        "LeaderboardTopFiveReturn",
+        "LeaderboardTopFivePressure"
+      ],
+      "text_sample": "{\"LeaderboardTopFiveServe\":[],\"LeaderboardTopFiveReturn\":[],\"LeaderboardTopFivePressure\":[]}",
+      "status": "ok_json",
       "error": null
     },
     {
-      "name": "serve_alt_lowercase",
-      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-      "params": {
-        "boardType": "serve",
-        "surface": "clay",
-        "duration": "2026"
-      },
+      "name": "2026_all_surfaces",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive/2026/All%20Surfaces?v=1",
       "http_status": 200,
-      "content_type": "text/html; charset=utf-8",
-      "looks_like_json": false,
-      "json_keys": [],
-      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"e5f0404c-511f-414d-8b92-8f9c97317c27\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='e5f0404c-511f-414d-8b92-8f9c97317c27'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
-      "status": "ok_non_json",
+      "content_type": "application/json; charset=utf-8",
+      "looks_like_json": true,
+      "json_keys": [
+        "LeaderboardTopFiveServe",
+        "LeaderboardTopFiveReturn",
+        "LeaderboardTopFivePressure"
+      ],
+      "text_sample": "{\"LeaderboardTopFiveServe\":[{\"PlayerId\":\"S0AG\",\"PlayerName\":\"Jannik Sinner\",\"PlayerCountryCode\":\"ITA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0ag\",\"ScRelativeUrlPlayerProfile\":\"/en/players/jannik-sinner/s0ag/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ita.svg\",\"Stat\":{\"StatRating\":\"307.3\"}},{\"PlayerId\":\"S0S1\",\"PlayerName\":\"Ben Shelton\",\"PlayerCountryCode\":\"USA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/s0s1\",\"ScRelativeUrlPlayerProfile\":\"/en/players/ben-shelton/s0s1/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/usa.svg\",\"Stat\":{\"StatRating\":\"306.3\"}},{\"PlayerId\":\"FB98\",\"PlayerName\":\"Taylor Fritz\",\"PlayerCountryCode\":\"USA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/fb98\",\"ScRelativeUrlPlayerProfile\":\"/en/players/taylor-fritz/fb98/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/usa.svg\",\"Stat\":{\"StatRating\":\"302.4\"}},{\"PlayerId\":\"Z355\",\"PlayerName\":\"Alexander Zverev\",\"PlayerCountryCode\":\"GER\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/z355\",\"ScRelativeUrlPlayerProfile\":\"/en/players/alexander-zverev/z355/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/ger.svg\",\"Stat\":{\"StatRating\":\"300.0\"}},{\"PlayerId\":\"AG37\",\"PlayerName\":\"Felix Auger-Aliassime\",\"PlayerCountryCode\":\"CAN\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/ag37\",\"ScRelativeUrlPlayerProfile\":\"/en/players/felix-auger-aliassime/ag37/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/can.svg\",\"Stat\":{\"StatRating\":\"295.7\"}}],\"LeaderboardTopFiveReturn\":[{\"PlayerId\":\"C0AU\",\"PlayerName\":\"Francisco Cerundolo\",\"PlayerCountryCode\":\"ARG\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/c0au\",\"ScRelativeUrlPlayerProfile\":\"/en/players/francisco-cerundolo/c0au/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/arg.svg\",\"Stat\":{\"StatRating\":\"169.7\"}},{\"PlayerId\":\"MM58\",\"PlayerName\":\"Daniil Medvedev\",\"PlayerCountryCode\":\"RUS\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/mm58\",\"ScRelativeUrlPlayerProfile\":\"/en/players/daniil-medvedev/mm58/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/rus.svg\",\"Stat\":{\"StatRating\":\"168.2\"}},{\"PlayerId\":\"A0E2\",\"PlayerName\":\"Carlos Alcaraz\",\"PlayerCountryCode\":\"ESP\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/a0e2\",\"ScRelativeUrlPlayerProfile\":\"/en/players/carlos-alcaraz/a0e2/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/esp.svg\",\"Stat\":{\"StatRating\":\"163.2\"}},{\"PlayerId\":\"MW02\",\"PlayerName\":\"Corentin Moutet\",\"PlayerCountryCode\":\"FRA\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/mw02\",\"ScRelativeUrlPlayerProfile\":\"/en/players/corentin-moutet/mw02/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/media/images/flags/fra.svg\",\"Stat\":{\"StatRating\":\"163.0\"}},{\"PlayerId\":\"N0BS\",\"PlayerName\":\"Mariano Navone\",\"PlayerCountryCode\":\"ARG\",\"PlayerHeadshot\":\"/-/media/alias/player-headshot/n0bs\",\"ScRelativeUrlPlayerProfile\":\"/en/players/mariano-navone/n0bs/overview\",\"ScRelativeUrlPlayerCountryFlag\":\"/-/me",
+      "status": "ok_json",
       "error": null
     }
   ],
@@ -139,7 +134,7 @@
           }
         },
         {
-          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113417959252064",
+          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113409962437321",
           "hits": [
             "StatsLeaderboard",
             "TopFive",
@@ -173,7 +168,7 @@
       "js_files_count": 1,
       "matches": [
         {
-          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113417959252064",
+          "js_url": "https://www.atptour.com/assets/atptour/js/atptour.min.js?bust=639113417970135866",
           "hits": [
             "StatsLeaderboard",
             "TopFive",
