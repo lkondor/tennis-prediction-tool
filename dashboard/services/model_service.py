@@ -7,6 +7,21 @@ from pathlib import Path
 PLAYERS_PATH = Path("data/live/players.json")
 WEATHER_PATH = Path("data/live/weather.json")
 ALIASES_PATH = Path("data/live/player_aliases.json")
+ATP_STATS_PATH = Path("data/live/atp_enriched_stats.json")
+
+
+ATP_SERVE_BASELINE = 270.0
+ATP_RETURN_BASELINE = 170.0
+ATP_PRESSURE_BASELINE = 190.0
+
+ATP_SERVE_SCALE = 35.0
+ATP_RETURN_SCALE = 30.0
+ATP_PRESSURE_SCALE = 30.0
+
+MAX_ACE_BOOST = 0.18
+MAX_BREAK_BOOST = 0.16
+MAX_PRESSURE_BREAK_BOOST = 0.04
+MAX_CONFIDENCE_BOOST_PER_PLAYER = 0.04
 
 
 def load_players():
@@ -33,13 +48,146 @@ def load_aliases():
         return json.load(f)
 
 
+def load_atp_enriched_stats():
+    if not ATP_STATS_PATH.exists():
+        return {}
+
+    try:
+        with open(ATP_STATS_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get("players", {})
+    except Exception:
+        return {}
+
+
+def norm_name(name):
+    return str(name).lower().strip()
+
+
+def is_doubles_player_name(name):
+    n = norm_name(name)
+
+    doubles_markers = [
+        "/",
+        " & ",
+        " and ",
+        " + ",
+    ]
+
+    return any(marker in n for marker in doubles_markers)
+
+
+def is_doubles_match(match):
+    return (
+        is_doubles_player_name(match.player1)
+        or is_doubles_player_name(match.player2)
+    )
+
+
+def bounded_rating_delta(value, baseline, scale, max_abs=1.0):
+    if value is None:
+        return 0.0
+
+    try:
+        z = (float(value) - baseline) / scale
+    except Exception:
+        return 0.0
+
+    return max(-max_abs, min(max_abs, z))
+
+
+def apply_atp_rating_adjustments(
+    player_name,
+    ace_rate,
+    break_rate,
+    season=2026,
+    surface="clay",
+):
+    """
+    ATP/WTA enriched stats:
+    - serve_rating: boost ace_rate
+    - return_rating: boost break_rate
+    - pressure_rating: small boost break_rate + confidence
+    """
+
+    atp_stats = load_atp_enriched_stats()
+    key = norm_name(player_name)
+
+    if key not in atp_stats:
+        return {
+            "ace_rate": ace_rate,
+            "break_rate": break_rate,
+            "has_atp": False,
+            "serve_rating": None,
+            "return_rating": None,
+            "pressure_rating": None,
+            "serve_delta": 0.0,
+            "return_delta": 0.0,
+            "pressure_delta": 0.0,
+            "confidence_boost": 0.0,
+        }
+
+    p = atp_stats[key]
+    suffix = f"{season}_{surface.lower()}"
+
+    serve_rating = p.get(f"serve_rating_{suffix}")
+    return_rating = p.get(f"return_rating_{suffix}")
+    pressure_rating = p.get(f"pressure_rating_{suffix}")
+
+    serve_delta = bounded_rating_delta(
+        serve_rating,
+        ATP_SERVE_BASELINE,
+        ATP_SERVE_SCALE,
+    )
+
+    return_delta = bounded_rating_delta(
+        return_rating,
+        ATP_RETURN_BASELINE,
+        ATP_RETURN_SCALE,
+    )
+
+    pressure_delta = bounded_rating_delta(
+        pressure_rating,
+        ATP_PRESSURE_BASELINE,
+        ATP_PRESSURE_SCALE,
+    )
+
+    ace_boost = serve_delta * MAX_ACE_BOOST
+
+    break_boost = (
+        return_delta * MAX_BREAK_BOOST
+        + pressure_delta * MAX_PRESSURE_BREAK_BOOST
+    )
+
+    ace_boost = max(-MAX_ACE_BOOST, min(MAX_ACE_BOOST, ace_boost))
+    break_boost = max(-MAX_BREAK_BOOST, min(MAX_BREAK_BOOST, break_boost))
+
+    confidence_boost = max(
+        0.0,
+        min(MAX_CONFIDENCE_BOOST_PER_PLAYER, pressure_delta * MAX_CONFIDENCE_BOOST_PER_PLAYER),
+    )
+
+    return {
+        "ace_rate": ace_rate * (1.0 + ace_boost),
+        "break_rate": break_rate * (1.0 + break_boost),
+        "has_atp": True,
+        "serve_rating": serve_rating,
+        "return_rating": return_rating,
+        "pressure_rating": pressure_rating,
+        "serve_delta": round(serve_delta, 3),
+        "return_delta": round(return_delta, 3),
+        "pressure_delta": round(pressure_delta, 3),
+        "confidence_boost": confidence_boost,
+    }
+
+
 def resolve_player_key(display_name, players):
     aliases = load_aliases()
     name = str(display_name).lower().strip()
 
     if name in aliases and aliases[name] in players:
         return aliases[name]
-    
+
     ALIASES = {
         "q. zheng": "qinwen zheng",
         "s. kenin": "sofia kenin",
@@ -52,7 +200,7 @@ def resolve_player_key(display_name, players):
         "b. shelton": "ben shelton",
         "i. swiatek": "iga swiatek",
         "a. sabalenka": "aryna sabalenka",
-        "e. rybakina": "elena rybakina"
+        "e. rybakina": "elena rybakina",
     }
 
     if name in ALIASES and ALIASES[name] in players:
@@ -83,6 +231,7 @@ def resolve_player_key(display_name, players):
         return name
 
     return name
+
 
 def win_prob(elo_a, elo_b):
     return 1 / (1 + 10 ** ((elo_b - elo_a) / 400))
@@ -172,6 +321,18 @@ def find_similar_players(player_name, all_players, top_n=5):
 
 
 def run_prediction(match):
+    if is_doubles_match(match):
+        return {
+            "playerA": {"aces": 0, "breaks": 0},
+            "playerB": {"aces": 0, "breaks": 0},
+            "totals": {"aces": 0, "breaks": 0},
+        }, {
+            "skipped": True,
+            "skip_reason": "doubles_match",
+            "matched_player_a": str(match.player1),
+            "matched_player_b": str(match.player2),
+        }
+
     players = load_players()
     weather = load_weather()
 
@@ -208,21 +369,42 @@ def run_prediction(match):
     elo_a = adjusted_elo(a)
     elo_b = adjusted_elo(b)
 
-    ace_rate_a = weighted_stat(safe_stat(a, "ace_rate_clay_3y", 0.25), a)
-    ace_rate_b = weighted_stat(safe_stat(b, "ace_rate_clay_3y", 0.25), b)
+    ace_rate_a_raw = weighted_stat(safe_stat(a, "ace_rate_clay_3y", 0.25), a)
+    ace_rate_b_raw = weighted_stat(safe_stat(b, "ace_rate_clay_3y", 0.25), b)
 
     ace_allowed_a = weighted_stat(safe_stat(a, "ace_allowed_clay_3y", 0.23), a)
     ace_allowed_b = weighted_stat(safe_stat(b, "ace_allowed_clay_3y", 0.23), b)
 
-    break_rate_a = weighted_stat(safe_stat(a, "break_rate_clay_3y", 0.20), a)
-    break_rate_b = weighted_stat(safe_stat(b, "break_rate_clay_3y", 0.20), b)
+    break_rate_a_raw = weighted_stat(safe_stat(a, "break_rate_clay_3y", 0.20), a)
+    break_rate_b_raw = weighted_stat(safe_stat(b, "break_rate_clay_3y", 0.20), b)
 
     break_allowed_a = weighted_stat(safe_stat(a, "break_allowed_clay_3y", 0.18), a)
     break_allowed_b = weighted_stat(safe_stat(b, "break_allowed_clay_3y", 0.18), b)
 
+    atp_a = apply_atp_rating_adjustments(
+        a_name,
+        ace_rate_a_raw,
+        break_rate_a_raw,
+        season=2026,
+        surface="clay",
+    )
+
+    atp_b = apply_atp_rating_adjustments(
+        b_name,
+        ace_rate_b_raw,
+        break_rate_b_raw,
+        season=2026,
+        surface="clay",
+    )
+
+    ace_rate_a = atp_a["ace_rate"]
+    ace_rate_b = atp_b["ace_rate"]
+    break_rate_a = atp_a["break_rate"]
+    break_rate_b = atp_b["break_rate"]
+
     p_a = win_prob(elo_a, elo_b)
     p_b = 1 - p_a
-    model_edge = abs(p_a - 0.5) * 2   # 0 → match coin flip, 1 → mismatch totale
+    model_edge = abs(p_a - 0.5) * 2
 
     c_factor = court_factor(match.court)
     madrid_factor = 1.15
@@ -249,7 +431,7 @@ def run_prediction(match):
         * match_length
         * ace_wf
         * sim_boost_a,
-        1
+        1,
     )
 
     aces_b = round(
@@ -260,7 +442,7 @@ def run_prediction(match):
         * match_length
         * ace_wf
         * sim_boost_b,
-        1
+        1,
     )
 
     breaks_a = round(
@@ -268,7 +450,7 @@ def run_prediction(match):
         * 10
         * (1.12 - (c_factor - 1) * 0.5)
         * break_wf,
-        1
+        1,
     )
 
     breaks_b = round(
@@ -276,7 +458,7 @@ def run_prediction(match):
         * 10
         * (1.12 - (c_factor - 1) * 0.5)
         * break_wf,
-        1
+        1,
     )
 
     def monte_carlo_values(mean, simulations=1000):
@@ -297,25 +479,17 @@ def run_prediction(match):
             "p90": round(values[int(0.90 * len(values))], 2),
         }
 
-    def over_probability(values, line):
-        if not values:
-            return 0
-
-        over_count = sum(1 for v in values if v > line)
-        return round(over_count / len(values), 3)
-
-
     mc_aces_a_values = monte_carlo_values(aces_a)
     mc_aces_b_values = monte_carlo_values(aces_b)
     mc_breaks_a_values = monte_carlo_values(breaks_a)
     mc_breaks_b_values = monte_carlo_values(breaks_b)
 
     mc_total_aces_values = [
-        a + b for a, b in zip(mc_aces_a_values, mc_aces_b_values)
+        a_val + b_val for a_val, b_val in zip(mc_aces_a_values, mc_aces_b_values)
     ]
 
     mc_total_breaks_values = [
-        a + b for a, b in zip(mc_breaks_a_values, mc_breaks_b_values)
+        a_val + b_val for a_val, b_val in zip(mc_breaks_a_values, mc_breaks_b_values)
     ]
 
     mc_aces_a = summarize_distribution(mc_aces_a_values)
@@ -326,10 +500,9 @@ def run_prediction(match):
     mc_total_aces = summarize_distribution(mc_total_aces_values)
     mc_total_breaks = summarize_distribution(mc_total_breaks_values)
 
-    
     stat_diff = (
-    abs(ace_rate_a - ace_rate_b)
-    + abs(break_rate_a - break_rate_b)
+        abs(ace_rate_a - ace_rate_b)
+        + abs(break_rate_a - break_rate_b)
     ) / 2
 
     stat_consistency = min(stat_diff * 2, 1.0)
@@ -352,14 +525,23 @@ def run_prediction(match):
     weather_confidence = 1.0 if avg_temp is not None and wind_kmh is not None else 0.6
     court_confidence = 1.0 if match.court else 0.7
 
-    confidence_score = round(
-        (data_confidence * 0.45)
-        + (model_edge * 0.30)
-        + (stat_consistency * 0.15)
-        + (weather_confidence * 0.10),
-        3
+    atp_confidence_boost = (
+        atp_a["confidence_boost"]
+        + atp_b["confidence_boost"]
     )
-    
+
+    confidence_score = round(
+        min(
+            1.0,
+            (data_confidence * 0.45)
+            + (model_edge * 0.30)
+            + (stat_consistency * 0.15)
+            + (weather_confidence * 0.10)
+            + atp_confidence_boost,
+        ),
+        3,
+    )
+
     if confidence_score >= 0.75:
         confidence_label = "Alta"
     elif confidence_score >= 0.55:
@@ -376,7 +558,7 @@ def run_prediction(match):
         + (win_edge * 0.25)
         + (ace_edge * 0.15)
         + (break_edge * 0.15),
-        3
+        3,
     )
 
     if value_score >= 0.70:
@@ -389,16 +571,16 @@ def run_prediction(match):
     result = {
         "playerA": {
             "aces": aces_a,
-            "breaks": breaks_a
+            "breaks": breaks_a,
         },
         "playerB": {
             "aces": aces_b,
-            "breaks": breaks_b
+            "breaks": breaks_b,
         },
         "totals": {
             "aces": round(aces_a + aces_b, 1),
-            "breaks": round(breaks_a + breaks_b, 1)
-        }
+            "breaks": round(breaks_a + breaks_b, 1),
+        },
     }
 
     context = {
@@ -408,14 +590,38 @@ def run_prediction(match):
         "data_quality_b": b.get("data_quality", "fallback"),
         "stats_source_a": a.get("data_quality", "fallback"),
         "stats_source_b": b.get("data_quality", "fallback"),
+
+        "atp_stats_a": atp_a["has_atp"],
+        "atp_stats_b": atp_b["has_atp"],
+        "atp_serve_rating_a": atp_a["serve_rating"],
+        "atp_serve_rating_b": atp_b["serve_rating"],
+        "atp_return_rating_a": atp_a["return_rating"],
+        "atp_return_rating_b": atp_b["return_rating"],
+        "atp_pressure_rating_a": atp_a["pressure_rating"],
+        "atp_pressure_rating_b": atp_b["pressure_rating"],
+        "atp_serve_delta_a": atp_a["serve_delta"],
+        "atp_serve_delta_b": atp_b["serve_delta"],
+        "atp_return_delta_a": atp_a["return_delta"],
+        "atp_return_delta_b": atp_b["return_delta"],
+        "atp_pressure_delta_a": atp_a["pressure_delta"],
+        "atp_pressure_delta_b": atp_b["pressure_delta"],
+        "atp_confidence_boost": round(atp_confidence_boost, 3),
+
         "elo_a": elo_a,
         "elo_b": elo_b,
         "win_prob_a": round(p_a, 3),
         "win_prob_b": round(p_b, 3),
+
+        "ace_rate_a_raw": round(ace_rate_a_raw, 4),
+        "ace_rate_b_raw": round(ace_rate_b_raw, 4),
+        "break_rate_a_raw": round(break_rate_a_raw, 4),
+        "break_rate_b_raw": round(break_rate_b_raw, 4),
+
         "ace_rate_a_used": round(ace_rate_a, 4),
         "ace_rate_b_used": round(ace_rate_b, 4),
         "break_rate_a_used": round(break_rate_a, 4),
         "break_rate_b_used": round(break_rate_b, 4),
+
         "court_factor": c_factor,
         "madrid_factor": madrid_factor,
         "match_length": round(match_length, 2),
@@ -423,6 +629,7 @@ def run_prediction(match):
         "wind_kmh": wind_kmh,
         "ace_weather_factor": ace_wf,
         "break_weather_factor": break_wf,
+
         "confidence_score": confidence_score,
         "confidence_label": confidence_label,
         "data_confidence": round(data_confidence, 3),
@@ -430,11 +637,13 @@ def run_prediction(match):
         "court_confidence": court_confidence,
         "model_edge": round(model_edge, 3),
         "stat_consistency": round(stat_consistency, 3),
+
         "ace_edge": round(ace_edge, 3),
         "break_edge": round(break_edge, 3),
         "win_edge": round(win_edge, 3),
         "value_score": value_score,
         "value_label": value_label,
+
         "mc_aces_a": mc_aces_a,
         "mc_aces_b": mc_aces_b,
         "mc_breaks_a": mc_breaks_a,
