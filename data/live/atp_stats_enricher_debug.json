@@ -1,16 +1,88 @@
 {
-  "updated_at": "2026-04-27T16:03:31.544322+02:00",
+  "updated_at": "2026-04-27T17:26:54.699380+02:00",
   "gateway_url": "https://app.atptour.com/api/v2/gateway",
-  "leaderboard_test": {
-    "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
-    "http_status": 200,
-    "content_type": "text/html; charset=utf-8",
-    "looks_like_json": false,
-    "json_keys": [],
-    "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"6830dec7-e200-41d2-bfb9-09d90a591d47\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='6830dec7-e200-41d2-bfb9-09d90a591d47'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />\r\n\r\n    <title>404 | ATP Tour | Tennis</title>\r\n    <meta name=\"description\" content=\"\" />\r\n    <meta name=\"title\" content=\"404 | ATP Tour | Tennis\" />\r\n    <meta name=\"keywords\" content=\"\" />\r\n    <meta name=\"thumbnail\" content=\"\" />\r\n    <meta property=\"pageTransitionTitle\" content=\"404\" />\r\n    <!-- facebook -->\r\n    <meta property='og:locale' content=\"en\" />\r\n    <meta property='og:type' content=\"article\" />\r\n    <meta property='og:title' content=\"404 | ATP Tour | Tennis\" />\r\n    <meta property='og:description' content=\"\" />\r\n    <meta property='og:image' content=\"\" />\r\n    <meta property='og:url' content=\"http://www.atptour.com/404?item=%2f-%2fwww%2fstatsleaderboard%2ftopfive&amp;user=default%5canonymous&amp;site=atptour\" />\r\n    <meta property='og:site_name' content=\"ATP Tour\" />\r\n    <!-- twitter -->\r\n    <meta name=\"twitter:card\" content=\"summary\" />\r\n    <meta name=\"twitter:title\" content=\"404 | ATP Tour | Tennis\" />\r\n    <meta name=\"twitter:creator\" content=\"@atptour\" />\r\n    <meta name=\"twitter:description\" content=\"\" />\r\n    <meta name=\"twitter:image\" content=\"\" />\r\n\r\n\r\n<link rel='alternate' hreflang='en' href=\"https://www.atptour.com/404\" />\r\n<link rel='alternate' hreflang='es' href=\"https://www.atptour.com/404\" />\r\n\r\n\r\n    <meta name=\"apple-itunes-app\" content=\"app-id=1480255719\">\r\n\r\n\r\n\r\n\r\n\r\n    <link rel=\"preload\" href=\"/assets/atptour/fonts/creatodisplay-regular-webfont.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\r\n    <link rel=\"preload\" href=\"/assets/atpt",
-    "status": "ok_non_json",
-    "error": null
-  },
+  "leaderboard_test": [
+    {
+      "name": "serve_clay_2026",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+      "params": {
+        "boardType": "serve",
+        "surface": "Clay",
+        "duration": "2026"
+      },
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "looks_like_json": false,
+      "json_keys": [],
+      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
+      "status": "ok_non_json",
+      "error": null
+    },
+    {
+      "name": "return_clay_2026",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+      "params": {
+        "boardType": "return",
+        "surface": "Clay",
+        "duration": "2026"
+      },
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "looks_like_json": false,
+      "json_keys": [],
+      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
+      "status": "ok_non_json",
+      "error": null
+    },
+    {
+      "name": "pressure_clay_2026",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+      "params": {
+        "boardType": "pressure",
+        "surface": "Clay",
+        "duration": "2026"
+      },
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "looks_like_json": false,
+      "json_keys": [],
+      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
+      "status": "ok_non_json",
+      "error": null
+    },
+    {
+      "name": "serve_all_52weeks",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+      "params": {
+        "boardType": "serve",
+        "surface": "All Surfaces",
+        "duration": "52 Weeks"
+      },
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "looks_like_json": false,
+      "json_keys": [],
+      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
+      "status": "ok_non_json",
+      "error": null
+    },
+    {
+      "name": "serve_alt_lowercase",
+      "url": "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive",
+      "params": {
+        "boardType": "serve",
+        "surface": "clay",
+        "duration": "2026"
+      },
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "looks_like_json": false,
+      "json_keys": [],
+      "text_sample": "<!doctype html>\r\n<html class=\"no-js\" lang=\"en\" dir=\"ltr\">\r\n<head>\r\n    <script>\r\n    window.atp_settings = {};\r\n    window.atp_settings.pre_roll_ad_unit = \"video-ad-atp\";\r\n</script>\r\n\r\n\r\n\r\n    <!-- GTM Head Tag -->\r\n    \r\n\r\n<!-- Google Tag Manager -->\r\n<script nonce=\"f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db\">\r\n        (function (w, d, s, l, i) {\r\n            w[l] = w[l] || []; w[l].push({\r\n                'gtm.start':\r\n                    new Date().getTime(), event: 'gtm.js'\r\n            }); var f = d.getElementsByTagName(s)[0],\r\n                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.nonce='f28a7dfc-363a-4c84-aeb5-e9d9ffadf3db'; j.src =\r\n                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);\r\n    })(window, document, 'script', 'dataLayer', 'GTM-KP6F8L8');\r\n</script>\r\n<!-- End Google Tag Manager -->\r\n\r\n    \r\n\r\n    \r\n\r\n    \r\n<!-- disable auto format for telephone numbers -->\r\n<meta name=\"format-detection\" content=\"telephone=no\">\r\n\r\n<meta name=\"viewport\" content=\"initial-scale=1.0, width=device-width, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.25\">\r\n<meta charset=\"UTF-8\">\r\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\r\n<meta name=\"SKYPE_TOOLBAR\" content=\"SKYPE_TOOLBAR_PARSER_COMPATIBLE\">\r\n\r\n\r\n<meta property=\"fb:app_id\" content=\"\" />\r\n<meta property=\"fb:pages\" content=\"\">\r\n\r\n<meta name=\"google\" content=\"notranslate\" />\r\n<meta name=\"medium\" content=\"website\" />",
+      "status": "ok_non_json",
+      "error": null
+    }
+  ],
   "pages": [
     {
       "name": "stats_home",

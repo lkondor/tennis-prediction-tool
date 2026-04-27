@@ -28,13 +28,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "D. Medvedev",
-    "player2": "N. Budkov Kjaer",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-27",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "M. Kostyuk",
     "player2": "C. Mcnally",
     "court": "Arantxa Sanchez Stadium",
@@ -91,23 +84,9 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "F. Cerundolo",
-    "player2": "L. Darderi",
-    "court": "Court 4",
-    "date": "2026-04-27",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "S. Kenin",
     "player2": "K. Boulter",
     "court": "Court 4",
-    "date": "2026-04-27",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "F. Reboul",
-    "player2": "J. Cash",
-    "court": "Court 6",
     "date": "2026-04-27",
     "tour": "ATP/WTA"
   }
