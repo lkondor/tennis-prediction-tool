@@ -24,6 +24,7 @@ from backfill.player_database import build_players_database
 from backfill.player_database import load_aliases, canonical_name
 from backfill.historical_builder import expand_history
 from backfill.match_results_updater import update_match_results
+from backfill.atp_stats_enricher import update_atp_enriched_stats
 aliases = load_aliases()
 
 OUT_DIR = Path("data/live")
@@ -647,6 +648,7 @@ def main():
 
     matches, match_source = update_matches()
     match_results_info = update_match_results()
+    atp_stats_info = update_atp_enriched_stats()
     history_info = expand_history()
     results_info = {
         "final_count": len(json.loads((OUT_DIR / "results_history.json").read_text(encoding="utf-8"))),
@@ -669,6 +671,8 @@ def main():
         "unresolved_players_count": player_info["unresolved_players_count"],
         "match_results_count": match_results_info["final_count"],
         "new_match_results_count": match_results_info["new_results_count"],
+        "atp_stats_status": atp_stats_info["status"],
+        "atp_stats_pages_checked": atp_stats_info["pages_checked"],
         "weather_days_count": weather_info["weather_days_count"],
     }
 
