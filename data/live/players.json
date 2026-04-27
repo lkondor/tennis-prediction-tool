@@ -1498,5 +1498,165 @@
     "madrid_break_rate": 0.0,
     "data_quality": "historical_match_stats",
     "matches_in_backfill": 13
+  },
+  "a. davidovich fokina": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "k. khachanov": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "m. skoch": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "b. winter lopez": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "a. krajicek": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "f. cerundolo": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "d. pel": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "a. goransson": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "n. skupski": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "r. cash": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "e. roger-vasselin": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "m. gonzalez": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "m. guinard": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "s. bolelli": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "f. reboul": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "j. cash": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
   }
 }
