@@ -13,6 +13,11 @@ OUTPUT_PATH = OUT_DIR / "atp_enriched_stats.json"
 
 MADRID_TZ = ZoneInfo("Europe/Madrid")
 
+ATP_GATEWAY_URL = "https://app.atptour.com/api/v2/gateway"
+ATP_STATS_LEADERBOARD_TOP_FIVE_URL = (
+    "https://www.atptour.com/en/-/www/StatsLeaderboard/TopFive"
+)
+
 ATP_STATS_URLS = {
     "stats_home": "https://www.atptour.com/en/stats/stats-home",
     "individual_game_stats": "https://www.atptour.com/en/stats/individual-game-stats",
@@ -48,13 +53,53 @@ def safe_get(url):
     headers = {
         "User-Agent": (
             "Mozilla/5.0 (compatible; MadridPredictor/1.0; +https://github.com)"
-        )
+        ),
+        "Accept": "application/json,text/html,*/*",
     }
     return requests.get(url, headers=headers, timeout=25)
 
 
 def clean_line(line):
     return " ".join(str(line).replace("\xa0", " ").split()).strip()
+
+
+def fetch_stats_leaderboard_top_five():
+    debug = {
+        "url": ATP_STATS_LEADERBOARD_TOP_FIVE_URL,
+        "http_status": None,
+        "content_type": None,
+        "looks_like_json": False,
+        "json_keys": [],
+        "text_sample": None,
+        "status": "not_started",
+        "error": None,
+    }
+
+    try:
+        response = safe_get(ATP_STATS_LEADERBOARD_TOP_FIVE_URL)
+        debug["http_status"] = response.status_code
+        debug["content_type"] = response.headers.get("content-type", "")
+        debug["text_sample"] = response.text[:3000]
+
+        try:
+            payload = response.json()
+            debug["looks_like_json"] = True
+
+            if isinstance(payload, dict):
+                debug["json_keys"] = list(payload.keys())[:50]
+            elif isinstance(payload, list):
+                debug["json_keys"] = ["list", f"length={len(payload)}"]
+
+            debug["status"] = "ok_json"
+        except Exception:
+            debug["status"] = "ok_non_json" if response.status_code == 200 else "http_error"
+
+        return debug
+
+    except Exception as exc:
+        debug["status"] = "exception"
+        debug["error"] = str(exc)
+        return debug
 
 
 def inspect_page(name, url):
@@ -96,6 +141,7 @@ def inspect_page(name, url):
                     or "stats" in attr_value.lower()
                     or "leaderboard" in attr_value.lower()
                     or "match" in attr_value.lower()
+                    or "gateway" in attr_value.lower()
                 ):
                     endpoint_candidates.append({
                         "tag": tag.name,
@@ -103,8 +149,8 @@ def inspect_page(name, url):
                         "value": attr_value[:500]
                     })
 
-        debug["endpoint_candidates"] = endpoint_candidates[:100]
-        
+        debug["endpoint_candidates"] = endpoint_candidates[:150]
+
         text = soup.get_text("\n", strip=True)
 
         lines = [
@@ -146,17 +192,21 @@ def update_atp_enriched_stats():
     for name, url in ATP_STATS_URLS.items():
         pages.append(inspect_page(name, url))
 
+    leaderboard_test = fetch_stats_leaderboard_top_five()
+
     debug = {
         "updated_at": datetime.now(MADRID_TZ).isoformat(),
+        "gateway_url": ATP_GATEWAY_URL,
+        "leaderboard_test": leaderboard_test,
         "pages": pages,
     }
 
     safe_write_json(DEBUG_PATH, debug)
 
-    # Per ora non produciamo stats finché non sappiamo quale pagina/API è parsabile.
     output = {
         "updated_at": datetime.now(MADRID_TZ).isoformat(),
         "status": "debug_only",
+        "gateway_url": ATP_GATEWAY_URL,
         "players": {}
     }
 
