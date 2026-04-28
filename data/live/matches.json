@@ -7,13 +7,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "V. Kopriva",
-    "player2": "R. Jodar",
-    "court": "Manolo Santana Stadium",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "A. Sabalenka",
     "player2": "H. Baptiste",
     "court": "Manolo Santana Stadium",
@@ -24,20 +17,6 @@
     "player1": "J. Mensik",
     "player2": "A. Zverev",
     "court": "Manolo Santana Stadium",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "J. Lehecka",
-    "player2": "L. Musetti",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "S. Tsitsipas",
-    "player2": "C. Ruud",
-    "court": "Arantxa Sanchez Stadium",
     "date": "2026-04-28",
     "tour": "ATP/WTA"
   },
@@ -58,13 +37,6 @@
   {
     "player1": "V. Zvonareva",
     "player2": "A. Sutjiadi",
-    "court": "Stadium 3",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "M. Pavic",
-    "player2": "A. Bublik",
     "court": "Stadium 3",
     "date": "2026-04-28",
     "tour": "ATP/WTA"
