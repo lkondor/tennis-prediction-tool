@@ -1696,5 +1696,35 @@
     "madrid_break_rate": 0.0,
     "data_quality": "historical_match_stats",
     "matches_in_backfill": 13
+  },
+  "a. sutjiadi": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "v. vacherot": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
+  },
+  "y. bhambri": {
+    "elo_clay": null,
+    "ace_rate_clay_3y": null,
+    "ace_allowed_clay_3y": null,
+    "break_rate_clay_3y": null,
+    "break_allowed_clay_3y": null,
+    "madrid_ace_rate": null,
+    "madrid_break_rate": null,
+    "data_quality": "unresolved"
   }
 }
