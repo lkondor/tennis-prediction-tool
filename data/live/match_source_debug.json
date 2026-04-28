@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-28T18:03:57.060388+02:00",
+  "updated_at": "2026-04-28T21:18:29.226530+02:00",
   "used_source": "ATP daily schedule",
   "atp": {
     "status": "ok",
     "url": "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule",
     "http_status": 200,
-    "line_count": 271,
+    "line_count": 280,
     "sample_lines": [
       "ATP Masters 1000 Madrid | Daily Schedule | ATP Tour | Tennis",
       "ATP Tour",
@@ -128,9 +128,9 @@
       "Musetti",
       "63 63"
     ],
-    "matches_count": 9,
+    "matches_count": 6,
     "error": null
   },
   "pdf": null,
-  "final_matches_count": 9
+  "final_matches_count": 6
 }

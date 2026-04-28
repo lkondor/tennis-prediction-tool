@@ -21,13 +21,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "F. Cerundolo",
-    "player2": "A. Blockx",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "D. Medvedev",
     "player2": "F. Cobolli",
     "court": "Arantxa Sanchez Stadium",
@@ -44,20 +37,6 @@
   {
     "player1": "Q. Gleason",
     "player2": "K. Siniakova",
-    "court": "Stadium 3",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "A. Olivetti",
-    "player2": "H. Heliovaara",
-    "court": "Stadium 3",
-    "date": "2026-04-28",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "V. Vacherot",
-    "player2": "Y. Bhambri",
     "court": "Stadium 3",
     "date": "2026-04-28",
     "tour": "ATP/WTA"
