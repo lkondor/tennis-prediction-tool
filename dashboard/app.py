@@ -71,7 +71,7 @@ def main():
     st.sidebar.subheader("Portfolio")
 
     min_portfolio_edge = st.sidebar.slider(
-        "Min Portfolio Edge",
+        "Min Portfolio EV",
         min_value=0.0,
         max_value=0.30,
         value=0.03,
@@ -134,6 +134,8 @@ def main():
                 "Break Edge": round(break_edge, 3),
                 "EV Ace": round((ace_over_prob * 1.85) - 1, 3),
                 "EV Break": round((break_over_prob * 1.85) - 1, 3),
+                "EV Ace": round((ace_over_prob * 1.85) - 1, 3),
+                "EV Break": round((break_over_prob * 1.85) - 1, 3),
                 "Confidence": ctx.get("confidence_label"),
                 "Confidence score": ctx.get("confidence_score"),
                 "Value": ctx.get("value_label"),
@@ -167,7 +169,7 @@ def main():
 
     for r in rows:
         if (
-            (r.get("EV Ace") or 0) >= 0.02
+            (r.get("EV Ace") or 0) >= min_portfolio_ev
             and (r.get("Confidence score") or 0) >= min_portfolio_confidence
         ):
             portfolio_rows.append(
@@ -178,13 +180,14 @@ def main():
                     "Line": r["Ace totali"],
                     "Model Prob": r["Over Ace Prob"],
                     "Edge": r["Ace Edge"],
+                    "EV": r["EV Ace"],
                     "Confidence": r["Confidence"],
                     "Confidence score": r["Confidence score"],
                 }
             )
 
         if (
-            (r.get("EV Break") or 0) >= 0.02
+            (r.get("EV Break") or 0) >= min_portfolio_ev
             and (r.get("Confidence score") or 0) >= min_portfolio_confidence
         ):
             portfolio_rows.append(
@@ -195,6 +198,7 @@ def main():
                     "Line": r["Break totali"],
                     "Model Prob": r["Over Break Prob"],
                     "Edge": r["Break Edge"],
+                    "EV": r["EV Break"],
                     "EV": round((r.get("EV Ace") or 0), 3),
                     "EV": round((r.get("EV Break") or 0), 3),
                     "Confidence": r["Confidence"],
