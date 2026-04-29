@@ -28,20 +28,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "S. Tsitsipas",
-    "player2": "G. Andreozzi",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-29",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "B. Winter Lopez",
-    "player2": "S. Doumbia",
-    "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-29",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "D. Shnaider",
     "player2": "E. Perez",
     "court": "Arantxa Sanchez Stadium",
@@ -52,20 +38,6 @@
     "player1": "S. Kenin",
     "player2": "A. Krunic",
     "court": "Arantxa Sanchez Stadium",
-    "date": "2026-04-29",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "B. Nakashima",
-    "player2": "L. Johnson",
-    "court": "Stadium 3",
-    "date": "2026-04-29",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "A. Molteni",
-    "player2": "F. Cabral",
-    "court": "Stadium 3",
     "date": "2026-04-29",
     "tour": "ATP/WTA"
   },

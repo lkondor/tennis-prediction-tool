@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-04-29T13:23:48.874494+02:00",
+  "updated_at": "2026-04-29T17:51:50.248787+02:00",
   "match_source": "ATP daily schedule",
-  "matches_count": 19,
-  "players_backfill_updated_at": "2026-04-29T13:23:48.874494+02:00",
-  "synthetic_added_matches": 152,
+  "matches_count": 15,
+  "players_backfill_updated_at": "2026-04-29T17:51:50.248787+02:00",
+  "synthetic_added_matches": 0,
   "synthetic_total_matches": 2441,
   "results_count": 2441,
   "new_results_count": 0,
