@@ -70,7 +70,7 @@ def main():
 
     st.sidebar.subheader("Portfolio")
 
-    min_portfolio_edge = st.sidebar.slider(
+    min_portfolio_ev = st.sidebar.slider(
         "Min Portfolio EV",
         min_value=0.0,
         max_value=0.30,
