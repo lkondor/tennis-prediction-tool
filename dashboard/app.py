@@ -545,6 +545,23 @@ def main():
     ace_ev = (ace_over_prob * ace_over_odds) - 1
     break_ev = (break_over_prob * break_over_odds) - 1
 
+    best_ace_bet = best_over_bet(
+        ace_values,
+        ace_over_odds,
+        context.get("confidence_score", 0),
+        min_ev=0.03,
+        min_confidence=0.55,
+    )
+    
+    best_break_bet = best_over_bet(
+        break_values,
+        break_over_odds,
+        context.get("confidence_score", 0),
+        min_ev=0.03,
+        min_confidence=0.55,
+    )
+    
+    
     ace_value_label = classify_value(
         ace_edge,
         context.get("confidence_score", 0),
