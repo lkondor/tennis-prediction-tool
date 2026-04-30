@@ -603,6 +603,8 @@ def main():
     
     st.subheader("Best Bet Suggestion")
 
+    best_bet_rows = []
+
     bb_col1, bb_col2 = st.columns(2)
 
     with bb_col1:
@@ -612,6 +614,20 @@ def main():
                 f"Prob {best_ace_bet['prob']:.1%} | "
                 f"EV {best_ace_bet['ev']:.1%} | "
                 f"Fair odds {best_ace_bet['fair_odds']}"
+            )
+
+            best_bet_rows.append(
+                {
+                    "Market": "Best Over Ace",
+                    "Match": f"{selected_match.player1} vs {selected_match.player2}",
+                    "Court": selected_match.court,
+                    "Line": best_ace_bet["line"],
+                    "Model Prob": best_ace_bet["prob"],
+                    "Edge": round(best_ace_bet["prob"] - ace_market_over_prob, 3),
+                    "EV": best_ace_bet["ev"],
+                    "Confidence": context.get("confidence_label"),
+                    "Confidence score": context.get("confidence_score"),
+                }
             )
         else:
             st.info("Ace: NO BET")
@@ -624,10 +640,32 @@ def main():
                 f"EV {best_break_bet['ev']:.1%} | "
                 f"Fair odds {best_break_bet['fair_odds']}"
             )
+
+            best_bet_rows.append(
+                {
+                    "Market": "Best Over Break",
+                    "Match": f"{selected_match.player1} vs {selected_match.player2}",
+                    "Court": selected_match.court,
+                    "Line": best_break_bet["line"],
+                    "Model Prob": best_break_bet["prob"],
+                    "Edge": round(best_break_bet["prob"] - break_market_over_prob, 3),
+                    "EV": best_break_bet["ev"],
+                    "Confidence": context.get("confidence_label"),
+                    "Confidence score": context.get("confidence_score"),
+                }
+            )
         else:
-            st.info("Break: NO BET")    
-    
-    
+            st.info("Break: NO BET")
+
+    if best_bet_rows:
+        if st.button("Salva Best Bet nel Tracking"):
+            added = add_picks(selected_date, best_bet_rows)
+
+            if added > 0:
+                st.success(f"{added} best bet salvate nel tracking.")
+            else:
+                st.caption("Best bet già presenti nel tracking.")
+
     value_col1, value_col2 = st.columns(2)
 
     with value_col1:
@@ -644,8 +682,9 @@ def main():
         elif break_value_label == "OK":
             st.warning(f"Break Bet: {break_value_label}")
         else:
-            st.error(f"Break Bet: {break_value_label}")
+            st.error(f"Break Bet: {break_value_label}")    
 
+    
     # ---- LINE SENSITIVITY ----
     st.subheader("Line Sensitivity")
 
