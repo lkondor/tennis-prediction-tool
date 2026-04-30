@@ -23,13 +23,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt || true
 
-      - name: Run build_player_stats
-        run: python scripts/build_player_stats.py
-
-      - name: Commit updated players.json
+      - name: Import historical matches
+        run: python scripts/import_historical_matches.py
+  
+      - name: Commit updated data files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git add data/live/players.json
-          git commit -m "Update players stats" || echo "No changes"
+          git pull --rebase origin main
+          git add data/raw/historical_matches.json data/live/players.json
+          git commit -m "Update historical matches and player stats" || echo "No changes"
           git push
