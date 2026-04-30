@@ -331,13 +331,18 @@ def import_historical_matches():
     skipped_files = []
 
     for path in sorted(IMPORT_DIR.iterdir()):
+        print(f"Reading file: {path}")
+
         if path.suffix.lower() not in SUPPORTED_EXTENSIONS:
             skipped_files.append(path.name)
             continue
 
         file_matches = read_csv_matches(path)
+        print(f"Parsed {len(file_matches)} matches from {path.name}")
+
         imported.extend(file_matches)
 
+    
     added = 0
     updated = 0
 
