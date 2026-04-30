@@ -67,6 +67,53 @@ def find_fair_line(sensitivity):
     return closest["Line"]
 
 
+def best_over_bet(values, odds, confidence, min_ev=0.03, min_confidence=0.55):
+    if not values:
+        return {
+            "label": "NO BET",
+            "line": None,
+            "prob": 0,
+            "ev": 0,
+            "fair_odds": None,
+        }
+
+    candidate_lines = [
+        round(min(values) + i * 0.5, 2)
+        for i in range(int((max(values) - min(values)) / 0.5) + 1)
+    ]
+
+    candidates = []
+
+    for line in candidate_lines:
+        prob = sum(1 for v in values if v > line) / len(values)
+        ev = (prob * odds) - 1
+        fair_odds = round(1 / prob, 2) if prob > 0 else None
+
+        candidates.append(
+            {
+                "line": line,
+                "prob": prob,
+                "ev": ev,
+                "fair_odds": fair_odds,
+            }
+        )
+
+    best = max(candidates, key=lambda x: x["ev"])
+
+    if best["ev"] >= min_ev and confidence >= min_confidence:
+        label = "BET"
+    else:
+        label = "NO BET"
+
+    return {
+        "label": label,
+        "line": best["line"],
+        "prob": round(best["prob"], 3),
+        "ev": round(best["ev"], 3),
+        "fair_odds": best["fair_odds"],
+    }
+
+
 def classify_value(edge, confidence):
     if edge >= 0.07 and confidence >= 0.60:
         return "FORTE"
@@ -536,6 +583,34 @@ def main():
         )
         st.caption(f"Overround Break market: {break_overround:.1%}")
 
+    
+    st.subheader("Best Bet Suggestion")
+
+    bb_col1, bb_col2 = st.columns(2)
+
+    with bb_col1:
+        if best_ace_bet["label"] == "BET":
+            st.success(
+                f"Over Ace {best_ace_bet['line']} @ {ace_over_odds:.2f} | "
+                f"Prob {best_ace_bet['prob']:.1%} | "
+                f"EV {best_ace_bet['ev']:.1%} | "
+                f"Fair odds {best_ace_bet['fair_odds']}"
+            )
+        else:
+            st.info("Ace: NO BET")
+
+    with bb_col2:
+        if best_break_bet["label"] == "BET":
+            st.success(
+                f"Over Break {best_break_bet['line']} @ {break_over_odds:.2f} | "
+                f"Prob {best_break_bet['prob']:.1%} | "
+                f"EV {best_break_bet['ev']:.1%} | "
+                f"Fair odds {best_break_bet['fair_odds']}"
+            )
+        else:
+            st.info("Break: NO BET")    
+    
+    
     value_col1, value_col2 = st.columns(2)
 
     with value_col1:
