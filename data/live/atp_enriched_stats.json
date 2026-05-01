@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-01T10:01:11.801370+02:00",
+  "updated_at": "2026-05-01T13:01:29.838891+02:00",
   "status": "ok",
   "source": "ATP StatsLeaderboard TopFive",
   "players": {
@@ -9,11 +9,13 @@
       "sources": [
         "ATP leaderboard serve 2026 clay",
         "ATP leaderboard pressure 2026 clay",
-        "ATP leaderboard pressure 2025 clay"
+        "ATP leaderboard pressure 2025 clay",
+        "ATP leaderboard serve 2026 all"
       ],
       "serve_rating_2026_clay": 308.1,
       "pressure_rating_2026_clay": 270.3,
-      "pressure_rating_2025_clay": 271.4
+      "pressure_rating_2025_clay": 271.4,
+      "serve_rating_2026_all": 306.3
     },
     "rafael jodar": {
       "player_id": "J0DZ",
@@ -33,13 +35,15 @@
         "ATP leaderboard return 2026 clay",
         "ATP leaderboard pressure 2026 clay",
         "ATP leaderboard serve 2025 clay",
-        "ATP leaderboard return 2025 clay"
+        "ATP leaderboard return 2025 clay",
+        "ATP leaderboard serve 2026 all"
       ],
       "serve_rating_2026_clay": 290.4,
       "return_rating_2026_clay": 189.1,
       "pressure_rating_2026_clay": 263.8,
       "serve_rating_2025_clay": 286.5,
-      "return_rating_2025_clay": 177.8
+      "return_rating_2025_clay": 177.8,
+      "serve_rating_2026_all": 307.3
     },
     "alejandro tabilo": {
       "player_id": "TE30",
@@ -64,12 +68,14 @@
         "ATP leaderboard return 2026 clay",
         "ATP leaderboard return 2025 clay",
         "ATP leaderboard pressure 2025 clay",
-        "ATP leaderboard return 2024 clay"
+        "ATP leaderboard return 2024 clay",
+        "ATP leaderboard return 2026 all"
       ],
       "return_rating_2026_clay": 189.4,
       "return_rating_2025_clay": 176.1,
       "pressure_rating_2025_clay": 292.3,
-      "return_rating_2024_clay": 178.0
+      "return_rating_2024_clay": 178.0,
+      "return_rating_2026_all": 163.2
     },
     "mariano navone": {
       "player_id": "N0BS",
@@ -77,11 +83,15 @@
       "sources": [
         "ATP leaderboard return 2026 clay",
         "ATP leaderboard pressure 2026 clay",
-        "ATP leaderboard return 2024 clay"
+        "ATP leaderboard return 2024 clay",
+        "ATP leaderboard return 2026 all",
+        "ATP leaderboard pressure 2026 all"
       ],
       "return_rating_2026_clay": 182.2,
       "pressure_rating_2026_clay": 276.4,
-      "return_rating_2024_clay": 177.5
+      "return_rating_2024_clay": 177.5,
+      "return_rating_2026_all": 160.0,
+      "pressure_rating_2026_all": 256.0
     },
     "casper ruud": {
       "player_id": "RH16",
@@ -105,9 +115,11 @@
       "player_id": "F0F1",
       "country": "FRA",
       "sources": [
-        "ATP leaderboard pressure 2026 clay"
+        "ATP leaderboard pressure 2026 clay",
+        "ATP leaderboard pressure 2026 all"
       ],
-      "pressure_rating_2026_clay": 305.3
+      "pressure_rating_2026_clay": 305.3,
+      "pressure_rating_2026_all": 268.3
     },
     "jakub mensik": {
       "player_id": "M0NI",
@@ -142,10 +154,12 @@
       "country": "GER",
       "sources": [
         "ATP leaderboard serve 2025 clay",
-        "ATP leaderboard serve 2024 clay"
+        "ATP leaderboard serve 2024 clay",
+        "ATP leaderboard serve 2026 all"
       ],
       "serve_rating_2025_clay": 282.9,
-      "serve_rating_2024_clay": 290.1
+      "serve_rating_2024_clay": 290.1,
+      "serve_rating_2026_all": 300.0
     },
     "alex de minaur": {
       "player_id": "DH58",
@@ -194,10 +208,12 @@
       "country": "RUS",
       "sources": [
         "ATP leaderboard pressure 2025 clay",
-        "ATP leaderboard pressure 2024 clay"
+        "ATP leaderboard pressure 2024 clay",
+        "ATP leaderboard return 2026 all"
       ],
       "pressure_rating_2025_clay": 273.6,
-      "pressure_rating_2024_clay": 304.0
+      "pressure_rating_2024_clay": 304.0,
+      "return_rating_2026_all": 168.2
     },
     "jiri lehecka": {
       "player_id": "L0BV",
@@ -248,6 +264,62 @@
         "ATP leaderboard pressure 2024 clay"
       ],
       "pressure_rating_2024_clay": 272.0
+    },
+    "taylor fritz": {
+      "player_id": "FB98",
+      "country": "USA",
+      "sources": [
+        "ATP leaderboard serve 2026 all"
+      ],
+      "serve_rating_2026_all": 302.4
+    },
+    "felix auger-aliassime": {
+      "player_id": "AG37",
+      "country": "CAN",
+      "sources": [
+        "ATP leaderboard serve 2026 all"
+      ],
+      "serve_rating_2026_all": 295.7
+    },
+    "francisco cerundolo": {
+      "player_id": "C0AU",
+      "country": "ARG",
+      "sources": [
+        "ATP leaderboard return 2026 all"
+      ],
+      "return_rating_2026_all": 169.7
+    },
+    "corentin moutet": {
+      "player_id": "MW02",
+      "country": "FRA",
+      "sources": [
+        "ATP leaderboard return 2026 all"
+      ],
+      "return_rating_2026_all": 163.0
+    },
+    "frances tiafoe": {
+      "player_id": "TD51",
+      "country": "USA",
+      "sources": [
+        "ATP leaderboard pressure 2026 all"
+      ],
+      "pressure_rating_2026_all": 259.3
+    },
+    "alexander bublik": {
+      "player_id": "BK92",
+      "country": "KAZ",
+      "sources": [
+        "ATP leaderboard pressure 2026 all"
+      ],
+      "pressure_rating_2026_all": 258.5
+    },
+    "learner tien": {
+      "player_id": "T0HA",
+      "country": "USA",
+      "sources": [
+        "ATP leaderboard pressure 2026 all"
+      ],
+      "pressure_rating_2026_all": 254.9
     }
   }
 }
