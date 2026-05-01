@@ -7,13 +7,6 @@
     "tour": "ATP/WTA"
   },
   {
-    "player1": "J. Sinner",
-    "player2": "A. Fils",
-    "court": "Manolo Santana Stadium",
-    "date": "2026-05-01",
-    "tour": "ATP/WTA"
-  },
-  {
     "player1": "A. Blockx",
     "player2": "A. Zverev",
     "court": "Manolo Santana Stadium",
@@ -24,13 +17,6 @@
     "player1": "K. Mladenovic",
     "player2": "K. Siniakova",
     "court": "Manolo Santana Stadium",
-    "date": "2026-05-01",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "M. Guinard",
-    "player2": "M. Gonzalez",
-    "court": "Arantxa Sanchez Stadium",
     "date": "2026-05-01",
     "tour": "ATP/WTA"
   },
