@@ -1,13 +1,18 @@
 {
   "tournament": "Madrid Open",
   "slug": "madrid",
-  "season": 2026,
   "surface": "clay",
   "tour": "combined",
   "location": "Madrid",
   "altitude_m": 667,
-  "lookback_tournament_editions": [2023, 2024, 2025],
-  "current_edition": 2026,
   "ace_environment_factor": 1.15,
-  "break_environment_factor": 1.00
+  "break_environment_factor": 1.0,
+  "season": 2026,
+  "lookback_tournament_editions": [
+    2023,
+    2024,
+    2025
+  ],
+  "current_edition": 2026,
+  "updated_at": "2026-05-02T15:31:57.338926"
 }
