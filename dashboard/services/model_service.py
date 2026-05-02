@@ -8,6 +8,7 @@ PLAYERS_PATH = Path("data/live/players.json")
 WEATHER_PATH = Path("data/live/weather.json")
 ALIASES_PATH = Path("data/live/player_aliases.json")
 ATP_STATS_PATH = Path("data/live/atp_enriched_stats.json")
+TOURNAMENT_CONTEXT_PATH = Path("data/live/tournament_context.json")
 
 
 ATP_SERVE_BASELINE = 270.0
@@ -57,6 +58,30 @@ def load_atp_enriched_stats():
         "atp": data.get("atp", {}),
         "wta": data.get("wta", {}),
     }
+
+def load_tournament_context():
+    default_context = {
+        "tournament": "Madrid Open",
+        "slug": "madrid",
+        "season": 2026,
+        "surface": "clay",
+        "tour": "combined",
+        "location": "Madrid",
+        "altitude_m": 667,
+        "ace_environment_factor": 1.15,
+        "break_environment_factor": 1.00,
+    }
+
+    if not TOURNAMENT_CONTEXT_PATH.exists():
+        return default_context
+
+    try:
+        with open(TOURNAMENT_CONTEXT_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return {**default_context, **data}
+    except Exception:
+        return default_context
 
 def norm_name(name):
     return str(name).lower().strip()
@@ -528,6 +553,12 @@ def run_prediction(match):
     players = load_players()
     weather = load_weather()
     atp_stats = load_atp_enriched_stats()
+    tournament_context = load_tournament_context()
+    
+    season = int(tournament_context.get("season", 2026))
+    surface = str(tournament_context.get("surface", "clay")).lower()
+    ace_environment_factor = float(tournament_context.get("ace_environment_factor", 1.0))
+    break_environment_factor = float(tournament_context.get("break_environment_factor", 1.0))
 
     a_name = resolve_player_key(match.player1, players)
     b_name = resolve_player_key(match.player2, players)
@@ -563,8 +594,8 @@ def run_prediction(match):
         break_rate=break_rate_a_raw,
         atp_stats=atp_stats,
         players=players,
-        season=2026,
-        surface="clay",
+        season=season,
+        surface=surface,
     )
 
     atp_b = apply_atp_rating_adjustments(
@@ -573,8 +604,8 @@ def run_prediction(match):
         break_rate=break_rate_b_raw,
         atp_stats=atp_stats,
         players=players,
-        season=2026,
-        surface="clay",
+        season=season,
+        surface=surface,
     )
 
     ace_rate_a = apply_context_adjustments(
@@ -663,7 +694,7 @@ def run_prediction(match):
 
     # Legacy tournament factor.
     # Lo teniamo per ora, ma nel prossimo step lo renderemo dinamico via tournament_context.json.
-    madrid_factor = 1.15
+    madrid_factor = ace_environment_factor
 
     match_length = 1.08 + (1 - abs(p_a - 0.5)) * 0.5
 
@@ -702,7 +733,8 @@ def run_prediction(match):
         ((break_rate_a + break_allowed_b) / 2)
         * 10
         * (1.12 - (c_factor - 1) * 0.5)
-        * break_wf,
+        * break_wf
+        * break_environment_factor,
         1,
     )
 
@@ -710,7 +742,8 @@ def run_prediction(match):
         ((break_rate_b + break_allowed_a) / 2)
         * 10
         * (1.12 - (c_factor - 1) * 0.5)
-        * break_wf,
+        * break_wf
+        * break_environment_factor,
         1,
     )
 
@@ -863,6 +896,12 @@ def run_prediction(match):
         "current_tournament_matches_b": b.get("current_tournament_matches", 0),
 
         "court_factor": c_factor,
+        "tournament": tournament_context.get("tournament"),
+        "tournament_slug": tournament_context.get("slug"),
+        "surface": surface,
+        "season": season,
+        "ace_environment_factor": ace_environment_factor,
+        "break_environment_factor": break_environment_factor,
         "madrid_factor": madrid_factor,
         "match_length": round(match_length, 2),
         "avg_temp": avg_temp,
