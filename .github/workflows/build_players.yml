@@ -25,6 +25,9 @@ jobs:
 
       - name: Update tournament context
         run: python scripts/update_tournament_context.py
+
+      - name: Test ATP scraping access
+        run: python scripts/test_atp_scrape_access.py
       
       - name: Fetch ATP live results
         run: python scripts/fetch_atp_live_results.py
