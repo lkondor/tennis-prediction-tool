@@ -4,13 +4,14 @@ import time
 from pathlib import Path
 from datetime import datetime
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 
 TOURNAMENT_CONTEXT_PATH = Path("data/live/tournament_context.json")
 OUTPUT_DIR = Path("data/raw/imports_live")
 
-MAX_MATCH_STATS_PER_RUN = 40
-REQUEST_SLEEP_SECONDS = 2
+MAX_MATCH_STATS_PER_RUN = 8
+REQUEST_SLEEP_SECONDS = 8
 
 
 ATP_RESULTS_URLS = {
@@ -62,10 +63,17 @@ def fetch_html(url):
         url,
         headers={
             "User-Agent": (
-                "Mozilla/5.0 (compatible; tennis-madrid-tool/1.0; "
-                "personal research)"
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/121.0.0.0 Safari/537.36"
             ),
-            "Accept": "text/html,application/xhtml+xml",
+            "Accept": (
+                "text/html,application/xhtml+xml,application/xml;"
+                "q=0.9,image/avif,image/webp,*/*;q=0.8"
+            ),
+            "Accept-Language": "en-US,en;q=0.9",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
         },
     )
 
@@ -382,9 +390,17 @@ def fetch_atp_live_results():
 
             time.sleep(REQUEST_SLEEP_SECONDS)
 
+        except HTTPError as e:
+            print(f"HTTP error {e.code} on {match_ref}")
+
+            if e.code == 403:
+                print("ATP returned 403. Stopping this run to avoid further blocking.")
+                break
+
         except Exception as e:
             print(f"Error fetching stats for {match_ref}: {e}")
 
+    
     output_path = OUTPUT_DIR / f"atp_live_{slug}_{context.get('season')}.json"
     save_json(output_path, records)
 
