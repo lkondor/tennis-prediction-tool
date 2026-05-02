@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-05-02T12:41:21.619322+02:00",
+  "updated_at": "2026-05-02T16:40:34.539468+02:00",
   "used_source": "ATP daily schedule",
   "atp": {
     "status": "ok",
     "url": "https://www.atptour.com/en/scores/current/madrid/1536/daily-schedule",
     "http_status": 200,
-    "line_count": 159,
+    "line_count": 160,
     "sample_lines": [
       "ATP Masters 1000 Madrid | Daily Schedule | ATP Tour | Tennis",
       "ATP Tour",
@@ -55,8 +55,8 @@
       "Schedule",
       "Draws",
       "Seeds",
+      "Day 14",
       "Day 13",
-      "Day 12",
       "Day",
       "Use Local Time Zone",
       "Switch",
@@ -67,15 +67,16 @@
       "Starts At 14:00",
       "F",
       "F",
-      "G.",
-      "Andreozzi",
-      "M.",
-      "Guinard",
-      "Vs",
       "H.",
       "Heliovaara",
       "H.",
       "Patten",
+      "Defeats",
+      "G.",
+      "Andreozzi",
+      "M.",
+      "Guinard",
+      "63 36 10-7",
       "H2H",
       "Not Before 17:00",
       "M.",
@@ -125,12 +126,11 @@
       "Career Win/Loss",
       "{{playerData.CareerWinLoss}}",
       "Service Games Won",
-      "{{playerData.ServiceGamesWon}}",
-      "NEWSLETTERS"
+      "{{playerData.ServiceGamesWon}}"
     ],
-    "matches_count": 5,
+    "matches_count": 4,
     "error": null
   },
   "pdf": null,
-  "final_matches_count": 5
+  "final_matches_count": 4
 }
