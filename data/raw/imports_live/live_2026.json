@@ -1,0 +1,18 @@
+[
+  {
+    "date": "2026-05-01",
+    "season": 2026,
+    "tour": "atp",
+    "tournament_slug": "madrid",
+    "surface": "clay",
+    "round": "R32",
+    "player1": "jannik sinner",
+    "player2": "grigor dimitrov",
+    "aces_p1": 8,
+    "aces_p2": 5,
+    "breaks_p1": 3,
+    "breaks_p2": 1,
+    "total_aces": 13,
+    "total_breaks": 4
+  }
+]
