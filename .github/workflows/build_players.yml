@@ -25,6 +25,9 @@ jobs:
 
       - name: Update tournament context
         run: python scripts/update_tournament_context.py
+
+      - name: Import live matches
+        run: python scripts/import_live_matches.py
       
       - name: Import historical matches
         run: python scripts/import_historical_matches.py
