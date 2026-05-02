@@ -25,7 +25,10 @@ jobs:
 
       - name: Update tournament context
         run: python scripts/update_tournament_context.py
-
+      
+      - name: Fetch ATP live results
+        run: python scripts/fetch_atp_live_results.py
+      
       - name: Import live matches
         run: python scripts/import_live_matches.py
       
@@ -39,7 +42,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git add data/live/tournament_context.json data/raw/historical_matches.json data/live/current_tournament_results.json data/live/players.json
+          git add data/live/tournament_context.json data/raw/historical_matches.json data/raw/imports_live data/live/current_tournament_results.json data/live/players.json
           git commit -m "Update historical matches and player stats" || echo "No changes"
           git pull --rebase origin main || true
           git push
