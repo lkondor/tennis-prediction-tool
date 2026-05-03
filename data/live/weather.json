@@ -1,30 +1,30 @@
 {
-  "2026-05-02": {
-    "avg_temp": 16.6,
-    "wind_kmh": 16.3
-  },
   "2026-05-03": {
-    "avg_temp": 16.5,
-    "wind_kmh": 14.4
+    "avg_temp": 16.1,
+    "wind_kmh": 15.0
   },
   "2026-05-04": {
-    "avg_temp": 15.5,
-    "wind_kmh": 16.0
+    "avg_temp": 14.850000000000001,
+    "wind_kmh": 16.3
   },
   "2026-05-05": {
-    "avg_temp": 13.9,
-    "wind_kmh": 15.7
+    "avg_temp": 14.05,
+    "wind_kmh": 14.8
   },
   "2026-05-06": {
-    "avg_temp": 13.2,
-    "wind_kmh": 6.7
+    "avg_temp": 13.5,
+    "wind_kmh": 5.9
   },
   "2026-05-07": {
-    "avg_temp": 15.75,
-    "wind_kmh": 14.0
+    "avg_temp": 15.8,
+    "wind_kmh": 10.3
   },
   "2026-05-08": {
-    "avg_temp": 14.1,
-    "wind_kmh": 15.8
+    "avg_temp": 11.2,
+    "wind_kmh": 17.5
+  },
+  "2026-05-09": {
+    "avg_temp": 12.55,
+    "wind_kmh": 21.7
   }
 }

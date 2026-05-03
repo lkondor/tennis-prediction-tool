@@ -1,30 +1,23 @@
 [
   {
-    "player1": "M. Andreeva",
-    "player2": "M. Kostyuk",
+    "player1": "D. Shnaider",
+    "player2": "K. Siniakova",
     "court": "Manolo Santana Stadium",
-    "date": "2026-05-02",
+    "date": "2026-05-03",
     "tour": "ATP/WTA"
   },
   {
-    "player1": "A. Garcia Fernandez",
-    "player2": "K. Guo",
-    "court": "Stadium 3",
-    "date": "2026-05-02",
+    "player1": "J. Sinner",
+    "player2": "A. Zverev",
+    "court": "Manolo Santana Stadium",
+    "date": "2026-05-03",
     "tour": "ATP/WTA"
   },
   {
     "player1": "F. Fontan Pardo De Santayana",
-    "player2": "R. Garcia Domenech",
-    "court": "Stadium 3",
-    "date": "2026-05-02",
-    "tour": "ATP/WTA"
-  },
-  {
-    "player1": "J. Dronov Merlos",
     "player2": "P. Rueda Albert",
     "court": "Stadium 3",
-    "date": "2026-05-02",
+    "date": "2026-05-03",
     "tour": "ATP/WTA"
   }
 ]
